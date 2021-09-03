@@ -1,0 +1,207 @@
+<div class="row" *ngIf="!studentView">
+    <div class="card ml-4 mb-4 mr-1">
+        <div class="card-header bg-dark">
+           <button class="btn btn-dark btn-sm" (click)="viewCoursesPlanned(coursesPlanned)">
+                 {{coursesPlanned['courses'].courseName}} [Code : {{coursesPlanned.idPlanCourse}}]
+           </button>
+            <span class="float-right text-light">
+
+            <div ngbDropdown class="d-inline-block" autoClose="outside">
+            <button class="btn btn-dark" id="export" ngbDropdownToggle>
+              <fa-icon [icon]="ellipsis"></fa-icon>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem type="button" class="btn btn-light btn-sm" (click)="viewCoursesPlanned(coursesPlanned)">
+              <span class="mr-1">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+              </span>View
+              </button>
+              <button type="button" class="btn btn-light btn-sm" ngbDropdownItem (click)="editCoursePlanned(coursesPlanned)">
+                <span class="mr-1"><i class="fa fa-pencil" aria-hidden="true"></i> </span>Edit
+              </button>
+                <button type="button" class="btn btn-light btn-sm" ngbDropdownItem (click)="archivePlannedModal(deleteModal,coursesPlanned)">
+              <span class="mr-1">
+                <i class="fa fa-archive" aria-hidden="true"></i>
+              </span>Archive
+              </button>
+            </div>
+          </div>
+          </span>
+        </div>
+        <div class="card-body" style="width: 22rem;">
+            <div class="row">
+                <div class="col-sm-3">
+                 <span style="font-size: 3rem;color:red" *ngIf="!coursesPlanned.courses.courseStatus" class="ml-3">
+                      <i class="fa fa-ban" aria-hidden="true"></i>
+                 </span>
+                    <span style="font-size: 3rem" *ngIf="coursesPlanned.courses.courseStatus" class="ml-3">
+                        <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                 </span>
+                </div>
+                <div class="col-sm-9" *ngIf="!coursesPlanned.courses.courseStatus;else elseBlock">
+                    <p class="text-truncate">
+                        <i class="fa fa-tachometer" aria-hidden="true"></i>
+                        Type : {{coursesPlanned.courseType}}
+                    </p>
+                    <p class="text-truncate">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Teacher : Johanes S.
+                    </p>
+                    <p class="text-truncate">
+                        <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                        Start Date : {{coursesPlanned.startDate}}
+                    </p>
+                    <p class="text-truncate">
+                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                        End Date : {{coursesPlanned.endDate}}
+                    </p>
+                    <p class="text-truncate">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        Time : {{coursesPlanned.startTime}} - {{coursesPlanned.endTime}}
+                    </p>
+                    <p class="text-truncate">
+                        <i class="fa fa-slideshare" aria-hidden="true"></i>
+                        Room : {{coursesPlanned["room"].id}}
+                    </p>
+                    <div *ngIf="coursesPlanned.plannedCourseStatus">
+                        <span class="badge badge-success">Planned</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #elseBlock>
+    <div class="col-sm-9">
+        <p class="text-truncate">
+            <i class="fa fa-tachometer" aria-hidden="true"></i>
+            Type : {{coursesPlanned.courseType}}
+        </p>
+        <p class="text-truncate">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            Teacher : {{coursesPlanned.employee.firstName}} {{coursesPlanned.employee.lastName}}
+        </p>
+        <p class="text-truncate">
+            <i class="fa fa-calendar-o" aria-hidden="true"></i>
+            Start Date : {{coursesPlanned.startDate}}
+        </p>
+        <p class="text-truncate">
+            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+            End Date : {{coursesPlanned.endDate}}
+        </p>
+        <p class="text-truncate">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+            Time : {{coursesPlanned.startTime}} - {{coursesPlanned.endTime}}
+        </p>
+        <p class="text-truncate">
+            <i class="fa fa-slideshare" aria-hidden="true"></i>
+            Room : {{coursesPlanned["room"].id}}
+        </p>
+        <div><span class="badge"
+                           [class.badge-danger]="coursesPlanned.plannedCourseStatus === 'finished'"
+                           [class.badge-success]="coursesPlanned.plannedCourseStatus === 'planned'"
+                           [class.badge-warning]="coursesPlanned.plannedCourseStatus === 'ongoing'">
+            {{coursesPlanned.plannedCourseStatus}}
+        </span>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #deleteModal let-modal class="modal-dialog">
+    <div class="modal-header">
+        <h4 class="modal-title">Course deleting</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>
+            Do you really want to archive the course planned
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="archivePlannedCourse(coursesPlanned)">Confirm</button>
+    </div>
+
+
+</ng-template>
+
+
+
+<div  class="row" *ngIf="studentView">
+    <div class="col-4 col-sm-4 col-md-4 col-lg-4" *ngFor="let s of coursesPlanned?.students">
+
+        <div  class="row">
+            <div class="card ml-4 mb-4 mr-1">
+                <div class="card-header bg-dark">
+           <span class="text-light">
+               {{s.firstName}} {{s.lastName}}
+           </span>
+                    <span class="float-right text-light">
+
+            <div ngbDropdown class="d-inline-block" autoClose="outside">
+            <button class="btn btn-dark" id="export" ngbDropdownToggle>
+              <fa-icon [icon]="ellipsis"></fa-icon>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem type="button" class="btn btn-light btn-sm" (click)="viewEmployee(employees)">
+              <span class="mr-1">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+              </span>View
+              </button>
+              <button type="button" class="btn btn-light btn-sm" ngbDropdownItem (click)="editEmployee(employees)">
+                <span class="mr-1"><i class="fa fa-pencil" aria-hidden="true"></i> </span>Edit
+              </button>
+               <button type="button" class="btn btn-light btn-sm" ngbDropdownItem (click)="archiveEmployee(employees)">
+              <span class="mr-1">
+                <i class="fa fa-archive" aria-hidden="true"></i>
+              </span>Archive
+              </button>
+            </div>
+          </div>
+          </span>
+                </div>
+                <div class="card-body flex-row flex-wrap">
+                   <!-- <div class="row">
+                        <div class="col-sm-3">
+                            <img src="/assets/avatar/avatar-3.png" *ngIf="employees.gender=='M' else femaleAvatar"
+                                 alt="employee-logo" class="rounded float-start" style="width: 50px">
+                            <div *ngIf="employees.isArchived">
+                                <span class="badge badge-danger">Archived</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-truncate">
+                                <i class="fa fa-briefcase" aria-hidden="true"></i>
+                                {{employees.jobRole}}
+                            </p>
+                            <p class="text-truncate">
+                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                {{employees.email}}
+                            </p>
+                            <p class="text-truncate">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                {{employees.privatePhone}}
+                            </p>
+                            <p class="text-truncate">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                {{employees.workLocation}}
+                            </p>
+                            <p class="text-truncate">
+                                <i class="fa fa-suitcase" aria-hidden="true"></i>
+                                {{employees.courseStatus}}
+                            </p>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+
+        <ng-template #femaleAvatar>
+            <img src="/assets/avatar/avatar-F.png" alt="employee-logo" class="rounded float-start" style="width: 50px">
+        </ng-template>
+
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<!--
+<div class="row">
+    <div class="col-sm-4">
+        <form class="d-flex">
+            <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
+        </form>
+    </div>
+    <div class="col-sm-8">
+        <div class="form-group form-inline float-right">
+            <button type="button" class="btn btn-primary mr-1" routerLink="/courses">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                Plan course
+            </button>
+            <div class="btn-group">
+                <div ngbDropdown class="d-inline-block"autoClose="outside" >
+                    <button class="btn btn-secondary mr-1" id="export" ngbDropdownToggle>
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                        Export
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem type="button" class="btn btn-light btn-sm" (click)="downloadPDF()">
+                            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                            PDF
+                        </button>
+                        <button type="button" class="btn btn-light btn-sm" ngbDropdownItem (click)="downloadExcel()">
+                            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                            XLSX
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success mr-1" (click)="open(content)">
+                <i class="fa fa-upload"></i>
+                Import
+            </button>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="total$ | async" [(page)]="coursesPlanned.page" [pageSize]="coursesPlanned.pageSize"></ngb-pagination>
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="coursesPlanned.pageSize">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+    </select>
+</div>
+-->
+<div class="row">
+    <div class="col-sm-4">
+        <form class="d-flex">
+            <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
+        </form>
+    </div>
+    <div class="col-sm-8">
+        <div class="form-group form-inline float-right">
+            <button type="button" class="btn btn-primary mr-1" routerLink="/courses/course-planner/">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Plan course
+            </button>
+            <div class="btn-group">
+            </div>
+            <button type="button" class="btn btn-success mr-1" (click)="open(content)">
+                <i class="fa fa-upload"></i>
+                Import
+            </button>
+        </div>
+    </div>
+</div>
+<div  class="row">
+    <div class="col-4 col-sm-4 col-md-4 col-lg-4" *ngFor="let course of coursesPlanned$|async">
+        <sb-coursesPlanned-card [coursesPlanned]="course"></sb-coursesPlanned-card>
+    </div>
+</div>
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="total$ | async" [(page)]="coursesPlannedService.page" [pageSize]="coursesPlannedService.pageSize"></ngb-pagination>
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="coursesPlannedService.pageSize">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+    </select>
+</div>

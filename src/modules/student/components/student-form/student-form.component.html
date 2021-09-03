@@ -1,0 +1,375 @@
+
+  <div class="row" *ngIf="id">
+    <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+    <div class="col-sm-2">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+
+          <div style="color: white" *ngIf='selectedStudent?.code'>
+           Code : {{selectedStudent?.code}}
+          </div>
+        </strong>
+        <div class="card-body">
+          <div class="card">
+            <img src="/assets/avatar/avatar-3.png" alt="employee-logo" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>  {{selectedStudent?.firstName}} {{selectedStudent?.lastName}}
+          </div>
+        </strong>
+        <ng-template #dangerTpl>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24"><path d="M10.872 6.831l1.695 3.904 3.654-1.561-1.79 3.426 3.333.954-3.417 1.338 2.231 4.196-4.773-2.582-2.869 2.287.413-3.004-3.792-.726 2.93-1.74-1.885-2.512 3.427.646.843-4.626zm-.786-6.831l-1.665 9.119-6.512-1.228 3.639 4.851-5.548 3.294 7.108 1.361-.834 6.076 5.742-4.577 9.438 5.104-4.288-8.064 6.834-2.677-6.661-1.907 3.25-6.22-6.98 2.982-3.523-8.114z"/></svg>
+          Danger Danger !
+        </ng-template>
+        <div class="card-body">
+          <form [formGroup]="editStudentForm" (validSubmit)="onSubmit(content)">
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">Informations personnels</legend>
+              <div class=form-row>
+                <div class="form-group col-md-6">
+                  <label for="firstname">Prenom(s)</label>
+                  <input type="text" class="form-control" id="firstname"
+                         formControlName="firstName"
+                         placeholder="John">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="lastname">Nom</label>
+                  <input type="text" class="form-control" id="lastname"
+                         formControlName="lastName"
+                         placeholder="Doe">
+                </div>
+               
+              </div>
+              
+              <div class="form-row">        
+                <div class="form-group col-md-3">
+                  <label for="birthday">Date de Naissance</label>
+                  <input type="date" class="form-control"
+                         formControlName="birthday"
+                         id="birthday" placeholder="23/01/1995">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="enrollmentDate">Date d'inscription</label>
+                  <input type="date" class="form-control"
+                         formControlName="enrollmentDate"
+                         id="enrollmentDate" placeholder="23/01/1995">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="gender">Genre</label>
+                  <select class="custom-select" (change)="changeGender($event)" id ="gender" formControlName="gender">
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">Adresse</legend>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="address">Addresse</label>
+                  <input type="text" class="form-control"
+                         formControlName="address"
+                         id="address" placeholder="Palmier Business Center 140 Boulevard Mohamed Zerktouni , Casablanca – Maroc">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="city">Ville</label>
+                  <input type="text" class="form-control"
+                         formControlName="city"
+                         id="city" placeholder="Casablanca">
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">Personnes à prevenir</legend>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <div class="card" class="form-row">
+                    <div class="form-group col-md-12">
+                      <div class="card-header bg-dark">
+  
+                    <span class="text-light">
+                      Contact Informations
+                    </span>
+                        <span class="text-light float-right"  (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed">
+                      <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                     </span>
+                      </div>
+                      <div #collapse="ngbCollapse" [(ngbCollapse)]="!isCollapsed">
+                        <div class="card">
+                          <div class="card">
+                            <div class="card-body">
+                              <ng-container formArrayName="emergencyContacts">
+                                <ng-template ngFor let-eContact [ngForOf]="Econtact.controls" let-i="index">
+                                  <fieldset class="scheduler-border">
+                                    <legend class="scheduler-border">Contact {{i+1}}</legend>
+                                    <div class="mb-3">
+                                      <div [formGroupName]="i">
+                                        <div class="form-row">
+                                          <div class="form-group col-md-6">
+                                            <input class="form-control" id="firstName" type="text" placeholder="Prenom(s)"
+                                                   formControlName="firstName" type="text">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <input class="form-control" id="lastName" type="text" placeholder="Nom"
+                                                   formControlName="lastName" type="text">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <input class="form-control" id="phone1" type="text" placeholder="Telephone 1"
+                                                   formControlName="phone1">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <input class="form-control" id="phone2" type="text" placeholder="Telephone 2"
+                                                   formControlName="phone2">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <input class="form-control" id="email" type="text" placeholder="Email"
+                                                   formControlName="email" type="text">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <input class="form-control" id="adress" type="text" placeholder="Adresse"
+                                                   formControlName="address" type="text">
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <select class="custom-select" (change)="changeGender($event)" id ="gender" formControlName="gender">
+                                              <option value="M">M</option>
+                                              <option value="F">F</option>
+                                            </select>
+                                          </div>
+                                          <div class="form-group col-md-6">
+                                            <select class="custom-select">
+                                              <option *ngFor="let symbol of keys(Econtactnature)" [ngValue]="Econtactnature[symbol]">{{symbol}}</option>
+                                            </select>
+                                          </div>
+                                          <div class="form-group col-md-1">
+                                          <span (click)="removeContact(i)">
+                                            <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                                          </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </fieldset>
+  
+                                </ng-template>
+                              </ng-container>
+                              <span class="text-light btn btn-dark mr-1 mb-6" (click)="addContact()">
+                                 Ajouter un nouveau contact
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <div class="float-right">
+              <button type="button" class="btn btn-danger mr-1" routerLink="/students">Annuler</button>
+              <button type="submit" class="btn btn-dark mr-1">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="row" *ngIf="!id">
+  <div class="col-sm-2">
+    <div class="card bg-light">
+      <strong class="card-header bg-dark">
+        <div style="color: white">
+
+        </div>
+      </strong>
+      <div class="card-body">
+        <div class="card">
+          <img src="/assets/avatar/newuserAvatar.png" alt="employee-logo" class="img-thumbnail">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-10">
+    <div class="card bg-light">
+      <strong class="card-header bg-dark">
+        <div style="color: white">
+
+        </div>
+      </strong>
+      <div class="card-body">
+        <form [formGroup]="createStudentForm" (validSubmit)="onSubmit(content)">
+          <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Informations personnels</legend>
+            <div class=form-row>
+              <div class="form-group col-md-6">
+                <label for="firstname">Prenom(s)</label>
+                <input type="text" class="form-control" id="firstname"
+                       formControlName="firstName"
+                       placeholder="John">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="lastname">Nom</label>
+                <input type="text" class="form-control" id="lastname"
+                       formControlName="lastName"
+                       placeholder="Doe">
+              </div>
+             
+            </div>
+            
+            <div class="form-row">        
+              <div class="form-group col-md-3">
+                <label for="birthday">Date de Naissance</label>
+                <input type="date" class="form-control"
+                       formControlName="birthday"
+                       id="birthday" placeholder="23/01/1995">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="enrollmentDate">Date d'inscription</label>
+                <input type="date" class="form-control"
+                       formControlName="enrollmentDate"
+                       id="enrollmentDate" placeholder="23/01/1995">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="gender">Genre</label>
+                <select class="custom-select" (change)="changeGender($event)" id ="gender" formControlName="gender">
+                  <option value="M">M</option>
+                  <option value="F">F</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="classRoom">Classe</label>
+                <select class="custom-select" id ="classRoom" (change)="changeRoom($event)" formControlName="classRoom">
+                  <option  *ngFor="let c of classrom$|async" [value]="c.id" >{{c.name}}</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Adresse</legend>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="address">Addresse</label>
+                <input type="text" class="form-control"
+                       formControlName="address"
+                       id="address" placeholder="Palmier Business Center 140 Boulevard Mohamed Zerktouni , Casablanca – Maroc">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="city">Ville</label>
+                <input type="text" class="form-control"
+                       formControlName="city"
+                       id="city" placeholder="Casablanca">
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Personnes à prevenir</legend>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <div class="card" class="form-row">
+                  <div class="form-group col-md-12">
+                    <div class="card-header bg-dark">
+
+                  <span class="text-light">
+                    Contact Informations
+                  </span>
+                      <span class="text-light float-right"  (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed">
+                    <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                   </span>
+                    </div>
+                    <div #collapse="ngbCollapse" [(ngbCollapse)]="!isCollapsed">
+                      <div class="card">
+                        <div class="card">
+                          <div class="card-body">
+                            <ng-container formArrayName="emergencyContacts">
+                              <ng-template ngFor let-eContact [ngForOf]="Econtact.controls" let-i="index">
+                                <fieldset class="scheduler-border">
+                                  <legend class="scheduler-border">Contact {{i+1}}</legend>
+                                  <div class="mb-3">
+                                    <div [formGroupName]="i">
+                                      <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                          <input class="form-control" id="firstName" type="text" placeholder="Prenom(s)"
+                                                 formControlName="firstName" type="text">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <input class="form-control" id="lastName" type="text" placeholder="Nom"
+                                                 formControlName="lastName" type="text">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <input class="form-control" id="phone1" type="text" placeholder="Telephone 1"
+                                                 formControlName="phone1">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <input class="form-control" id="phone2" type="text" placeholder="Telephone 2"
+                                                 formControlName="phone2">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <input class="form-control" id="email" type="text" placeholder="Email"
+                                                 formControlName="email" type="text">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <input class="form-control" id="adress" type="text" placeholder="Adresse"
+                                                 formControlName="address" type="text">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <select class="custom-select" (change)="changeGender($event)" id ="gender" formControlName="gender">
+                                            <option value="M">M</option>
+                                            <option value="F">F</option>
+                                          </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                          <select class="custom-select">
+                                            <option *ngFor="let symbol of keys(Econtactnature)" [ngValue]="Econtactnature[symbol]">{{symbol}}</option>
+                                          </select>
+                                        </div>
+                                        <div class="form-group col-md-1">
+                                        <span (click)="removeContact(i)">
+                                          <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                                        </span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </fieldset>
+
+                              </ng-template>
+                            </ng-container>
+                            <span class="text-light btn btn-dark mr-1 mb-6" (click)="addContact()">
+                               Ajouter un nouveau contact
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="float-right">
+            <button type="button" class="btn btn-danger mr-1" routerLink="/students">Annuler</button>
+            <button type="submit" class="btn btn-dark mr-1">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Confirmation</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Operation successfully registered</p>
+    </div>
+  </ng-template>

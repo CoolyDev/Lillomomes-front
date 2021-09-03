@@ -1,0 +1,317 @@
+<!---->
+<div class="row">
+    <div class="col-sm-2">
+        <div class="card bg-light">
+            <strong class="card-header bg-dark">
+        <span class="text-light">
+          <i class="fa fa-id-card-o" aria-hidden="true"></i>
+         Code : {{selectedEmployDetails?.id}}
+        </span>
+            </strong>
+            <div class="card-body">
+                <div class="card">
+                    <img src="/assets/avatar/avatar-3.png" alt="employee-lo go" class="img-thumbnail">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-10">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1">
+                <a ngbNavLink>Personal Data</a>
+                <ng-template ngbNavContent>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card bg-light">
+                                <strong class="card-header bg-dark">
+                              <span class="text-light">
+                               <i class="fa fa-list" aria-hidden="true"></i> Personal Data
+                              </span>
+                                </strong>
+                                <div class="card-body">
+                                    <fieldset class="scheduler-border">
+                                        <legend class="scheduler-border">General Information</legend>
+                                        <p>
+                                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                                            <strong> First Name:</strong>
+                                            {{selectedEmployDetails.firstName}}
+                                        </p>
+                                        <p>
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                            <strong> Last Name:</strong>
+                                            {{selectedEmployDetails.lastName}}
+                                        </p>
+
+                                        <p>
+                                            <i class="fa fa-venus" aria-hidden="true"></i>
+                                            <strong> Gender:</strong>
+                                            {{selectedEmployDetails.gender}}
+                                        </p>
+
+                                        <p>
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            <strong> Birthday:</strong>
+                                            {{selectedEmployDetails.birthday}}
+                                        </p>
+                                        <p>
+                                            <i class="fa fa-flag" aria-hidden="true"></i>
+
+                                            <strong> Nationality:</strong>
+                                            {{selectedEmployDetails.nationality}}
+                                        </p>
+                                        <!-- <p>
+                                            <i class="fa fa-briefcase" aria-hidden="true"></i>
+                                            <strong> Role:</strong>
+                                            {{selectedEmployDetails.jobRole}}
+                                        </p>-->
+
+                                        <p>
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <strong> Email: </strong>
+                                            <a href="mailto:{{selectedEmployDetails.email}}">{{selectedEmployDetails.email}}</a>
+                                        </p>
+                                        <p>
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            <strong> Business Phone:</strong>
+                                            {{selectedEmployDetails.businessPhone}}
+                                        </p>
+                                        <p>
+                                            <i class="fa fa-mobile" aria-hidden="true"></i>
+                                            <strong> Private Phone:</strong>
+                                            {{selectedEmployDetails.privatePhone}}
+                                        </p>
+                                        <p *ngIf="!selectedEmployDetails.status">
+                                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                         Status :  <span class="badge badge-success">Active</span>
+
+                                        <p *ngIf="selectedEmployDetails.status">
+                                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                            Status :  <span class="badge badge-danger">Archived</span>
+                                        </p>
+
+                                        <!-- <p>
+                                           <span style="font-size:3em">
+                                                     <a href="{{selectedEmployDetails.linkedinLink}}" target="_blank">
+                                                         <i class="fa fa-linkedin-square mr-2" aria-hidden="true">
+                                                         </i>
+                                                     </a>
+                                           </span>
+                                            <span style="font-size:3em">
+                                                <a [href]=selectedEmployDetails.xingLink target="_blank">
+                                                        <i class="fa fa-xing" aria-hidden="true"></i>
+                                                </a>
+                                            </span>
+                                            <span style="font-size:3em">
+                                                  <a  href="{{selectedEmployDetails.facebookLink}}" target="_blank">
+                                                     <i class="fa fa-facebook-square mr-2" aria-hidden="true"></i>
+                                                </a>
+                                            </span>
+                                            <span style="font-size:3em">
+                                                <a [attr.href]=selectedEmployDetails.youtubeLink target="_blank">
+                                                     <i class="fa fa-youtube-play mr-2" aria-hidden="true"></i>
+                                                </a>
+                                            </span>
+                                        </p> -->
+                                    </fieldset>
+                                    <fieldset class="scheduler-border">
+                                        <legend class="scheduler-border">Address</legend>
+                                        <p>
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                            <strong> Address:</strong>
+                                            {{selectedEmployDetails.address}}
+                                        </p>
+                                        <p>
+                                            <i class="fa fa-venus" aria-hidden="true"></i>
+                                            <strong> City:</strong>
+                                            {{selectedEmployDetails.city}}
+                                        </p>
+                                        <p>
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <strong> Country:</strong>
+                                            {{selectedEmployDetails.country}}
+                                        </p>
+                                    </fieldset>
+
+                                    <!-- <p>
+                                         <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                         <strong> Work Location:</strong>
+                                         {{selectedEmployDetails.workLocation}}
+                                     </p>
+                                     <p>
+                                         <i class="fa fa-suitcase" aria-hidden="true"></i>
+                                         <strong> Status:</strong>
+                                         {{selectedEmployDetails.status}}
+                                     </p>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #femaleAvatar>
+                        <div class="card">
+                            <img src="/assets/avatar/avatar-F.png" alt="employee-lo go" class="img-thumbnail">
+                        </div>
+                    </ng-template>
+
+                </ng-template>
+            </li>
+            <!-- <li [ngbNavItem]="2">
+                <a ngbNavLink>Functional Data</a>
+                <ng-template ngbNavContent>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card bg-light">
+                                <strong class="card-header bg-dark">
+                            <span class="text-light">
+                                <i class="fa fa-list" aria-hidden="true"></i>
+                              Functional Data
+                            </span>
+                                </strong>
+                                <div class="card-body">
+
+                                    <p>
+                                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                        <strong> Institution: </strong>
+                                        <span *ngFor="let i of selectedEmployDetails?.institutions"
+                                              class="badge mr-2"
+                                              [class.badge-danger]="i.institutionName === 'GAL'"
+                                              [class.badge-primary]="i.institutionName === 'GUM'"
+                                              [class.badge-warning]="i.institutionName === 'STK'">
+                                         {{i.institutionName}}
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-desktop" aria-hidden="true"></i>
+                                        <strong> Departement:</strong>
+                                        {{selectedEmployDetails.department}}
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-venus" aria-hidden="true"></i>
+                                        <strong> Job Role:</strong>
+                                        {{selectedEmployDetails.jobRole}}
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        <strong> Job Type:</strong>
+                                        {{selectedEmployDetails.jobType}}
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                        <strong> Work Location:</strong>
+                                        {{selectedEmployDetails.workLocation}}
+                                    </p>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+                <a ngbNavLink> Skills </a>
+                <ng-template ngbNavContent>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card bg-light">
+                                <strong class="card-header bg-dark">
+                              <span class="text-light">
+                                  <i class="fa fa-list" aria-hidden="true"></i>
+                                Skills
+                              </span> </strong>
+                                <div class="card-body">
+                                    <p>
+                                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                        <strong> Skills: </strong>
+                                        <span *ngFor="let s of selectedEmployDetails?.skills"
+                                              class="badge badge-secondary mr-2">
+                                     {{s.skillName}}
+                                        </span>
+                                    </p>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="">
+                <a ngbNavLink> Emergency Contacts</a>
+                <ng-template ngbNavContent>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card bg-light">
+                                <strong class="card-header bg-dark">
+                              <span class="text-light">
+                                  <i class="fa fa-list" aria-hidden="true"></i>
+                                Emergency Contacts
+                              </span> </strong>
+                                <div class="card-body">
+                                    <div *ngFor="let ec of selectedEmployDetails?.emergencyContacts;let i=index">
+                                        <div class="card mb-3">
+                                            <div class="card-header bg-dark text-light">
+                                              Contact {{i+1}}
+                                            </div>
+                                            <p class="ml-2">
+                                                 <i class="fa fa-user-o" aria-hidden="true"></i>
+                                                <strong> First Name:</strong>
+                                                <span>{{ec.firstName}}</span>
+                                            </p>
+                                            <p class="ml-2">
+                                                 <i class="fa fa-user" aria-hidden="true"></i>
+                                                <strong> Last Name:</strong>
+                                                <span>
+                                             {{ec.lastName}}
+                                        </span>
+                                            </p>
+                                            <p class="ml-2">
+                                                <i class="fa fa-venus" aria-hidden="true"></i>
+                                                <strong> Gender:</strong>
+                                                <span>
+                                             {{ec.gender}}
+                                        </span>
+                                            </p>
+                                            <p class="ml-2">
+                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                <strong> Email:</strong>
+                                                <span>
+                                             {{ec.email}}
+                                        </span>
+                                            </p>
+                                            <p class="ml-2">
+                                                <i class="fa fa-mobile" aria-hidden="true"></i>
+                                                <strong> Phone 1:</strong>
+                                                <span>
+                                             {{ec.phone1}}
+                                        </span>
+                                            </p>
+                                          <p class="ml-2">
+                                               <i class="fa fa-phone" aria-hidden="true"></i>
+                                                <strong> Phone 2:</strong>
+                                                <span>
+                                             {{ec.phone2}}
+                                        </span>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </ng-template>
+            </li> -->
+        </ul>
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+</div>
+
+
+<!---->
+
+

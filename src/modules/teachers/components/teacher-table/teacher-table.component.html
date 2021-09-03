@@ -1,0 +1,250 @@
+
+<!--<form *ngIf="display">
+  <div class="row">
+    <div class="col-sm-3">
+      <form class="d-flex">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
+        &lt;!&ndash;        <button class="btn btn-outline-success" type="submit">Search</button>&ndash;&gt;
+      </form>
+    </div>
+    <div class="col-sm-9">
+      <div class="form-group form-inline float-right">
+        <button type="button" class="btn btn-primary mr-1" routerLink="/employees/employee-create">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+          Add teacher
+        </button>
+        <div class="btn-group">
+          <div ngbDropdown class="d-inline-block"autoClose="outside" >
+            <button class="btn btn-secondary mr-1" id="export" ngbDropdownToggle>
+              <i class="fa fa-download" aria-hidden="true"></i>
+              Export
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem type="button" class="btn btn-light btn-sm" (click)="downloadPDF()">
+                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                PDF
+              </button>
+              <button type="button" class="btn btn-light btn-sm" ngbDropdownItem (click)="downloadExcel()">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                XLSX
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-success mr-1" (click)="open(content)">
+          <i class="fa fa-upload"></i>
+          Import
+        </button>
+        <div class="btn-group">
+          <div ngbDropdown class="d-inline-block"autoClose="outside" >
+            <button class="btn btn-danger mr-1" id="dropdownBasic1" ngbDropdownToggle>
+              <i class="fa fa-filter" aria-hidden="true"></i>
+              Filter
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <label class="dropdown-item"><input type="checkbox" id="lastName" checked
+                                                  (change)="filterName($event)"> Last Name
+              </label>
+              <label class="dropdown-item"><input type="checkbox" id="FirstName" checked
+                                                  (change)="filterFirstName($event)"> First Name
+              </label>
+              <label class="dropdown-item"><input type="checkbox" id="role" checked
+                                                  (change)="filterRole($event)"> Role
+              </label>
+              <label class="dropdown-item"><input type="checkbox" id="phone1" checked
+                                                  (change)="filterPhone1($event)"> Business Phone
+              </label>
+              <label class="dropdown-item"><input type="checkbox" id="phone2" checked
+                                                  (change)="filterPhone2($event)"> Private Phone
+              </label>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-outline-success mr-1" type="submit" (click)="changeDisplay()">
+          <i class="fa fa-list-alt" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <table class="table table-bordered" id="myTableElementId">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">Code</th>
+      <th scope="col" sbSortable="firstName"
+          *ngIf='firstNameCbx'
+          (sort)="onSort($event)"><span>First Name</span>
+
+      </th>
+      <th scope="col" sbSortable="lastName" (sort)="onSort($event)"
+          *ngIf='lastnameCbx'>
+        <span>Last Name</span>
+      </th>
+      <th scope="col" sbSortable="role"
+          *ngIf='roleCbx'
+          (sort)="onSort($event)"><span>Role</span>
+      </th>
+      <th scope="col" sbSortable="businessPhone"
+          *ngIf='phone1Cbx'
+          (sort)="onSort($event)"><span>Business Phone</span>
+      </th>
+      <th scope="col" sbSortable="privatePhone"
+          *ngIf='phone2Cbx'
+          (sort)="onSort($event)"><span>Private Phone</span>
+      </th>
+      <th scope="col"><span>Actions</span></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let employee of employee$ |async | filter:searchText  let i = index">
+      <th scope="row">{{ employee.id }}</th>
+      <th scope="row" *ngIf='firstNameCbx'>{{ employee.firstName }}</th>
+      <th scope="row" *ngIf='lastnameCbx'>{{ employee.lastName }}</th>
+      <th scope="row" *ngIf='roleCbx'>{{ employee.jobRole }}</th>
+      <th scope="row" *ngIf='phone1Cbx' >{{ employee.businessPhone }}</th>
+      <th scope="row" *ngIf='phone2Cbx'>{{ employee.privatePhone }}</th>
+      <td class="overflow-hidden">
+        <div ngbDropdown container="body">
+          <button class="btn btn-dark btn-sm" ngbDropdownToggle>
+            <i class="fa fa-cog" aria-hidden="true"></i>
+          </button>
+          <div ngbDropdownMenu>
+            <button class="btn btn-light btn-sm" ngbDropdownItem
+                    (click)="viewEmployee(employee)">
+              <i class="fa fa-eye" aria-hidden="true"></i> View</button>
+            <div class="dropdown-divider"></div>
+            <button class="btn btn-light btn-sm" ngbDropdownItem
+                    (click)="editEmployee(employee)">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+              Edit</button>
+            <div class="dropdown-divider"></div>
+            <button ngbDropdownItem class="btn btn-light btn-sm"
+                    (click)="deleteEmployeeModal(deleteModal,employee)"
+            >
+              <i class="fa fa-trash" aria-hidden="true"></i>
+              Archive</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="total$ | async" [(page)]="employeesService.page" [pageSize]="employeesService.pageSize"></ngb-pagination
+    >
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="employeesService.pageSize">
+    <option [ngValue]="2">2 items per page</option>
+    <option [ngValue]="4">4 items per page</option>
+    <option [ngValue]="6">6 items per page</option>
+  </select>
+  </div>
+
+</form>-->
+
+<ng-template #deleteModal let-modal class="modal-dialog">
+  <div class="modal-header">
+    <h4 class="modal-title">Employee archiving</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      Do you really want to archive the employee
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancel</button>
+    <button type="submit" class="btn btn-primary" (click)="deleteEmployee()">Confirm</button>
+  </div>
+
+
+</ng-template>
+
+
+<ng-template #content let-modal>
+  <div style="margin-top: 10px">
+    <div class="modal-header">
+      <!-- <div class="d-block">
+        <h4 class="modal-title" id="modal-basic-title">Upload</h4>
+        <div class="alert alert-danger" role="alert">
+          Warning:This functionality not working yet !
+        </div>
+      </div> -->
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross Click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <ngx-dropzone (change)="onSelect($event)">
+        <ngx-dropzone-label>Drop your file here</ngx-dropzone-label>
+        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-preview>
+      </ngx-dropzone>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save Click')">Save</button>
+    </div>
+  </div>
+</ng-template>
+
+
+<div *ngIf="!display">
+  <div class="row">
+    <div class="col-sm-4">
+      <form class="d-flex">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
+      </form>
+    </div>
+    <div class="col-sm-8">
+      <div class="form-group form-inline float-right">
+        <button type="button" class="btn btn-primary mr-1" routerLink="/teacher/create-teacher">
+          <i class="fa fa-user-plus" aria-hidden="true"></i>
+          Add teacher
+        </button>
+        <div class="btn-group">
+          <div ngbDropdown class="d-inline-block"autoClose="outside" >
+            <button class="btn btn-secondary mr-1" id="export" ngbDropdownToggle>
+              <i class="fa fa-download" aria-hidden="true"></i>
+              Export
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem type="button" class="btn btn-light btn-sm" (click)="downloadPDF()">
+                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                PDF
+              </button>
+              <button type="button" class="btn btn-light btn-sm" ngbDropdownItem (click)="downloadExcel()">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                XLSX
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-success mr-1" (click)="open(content)">
+          <i class="fa fa-upload"></i>
+          Import
+        </button>
+
+        <!--<button class="btn btn-outline-success mr-1" type="submit" (click)="changeDisplay()">
+          <i class="fa fa-th-large" aria-hidden="true"></i>
+        </button>-->
+      </div>
+    </div>
+  </div>
+  <div  class="row">
+    <div class="col-4 col-sm-4 col-md-4 col-lg-4" *ngFor="let teach of teacher$|async| filter:searchText ">
+      <sb-teacher-card [teacher]="teach"></sb-teacher-card>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="total$ | async" [(page)]="teacherService.page" [pageSize]="teacherService.pageSize"></ngb-pagination>
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="teacherService.pageSize">
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+  </div>
+</div>

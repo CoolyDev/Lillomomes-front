@@ -1,0 +1,117 @@
+<form>
+  <div class="row">
+      <div class="col-sm-3">
+        <form class="d-flex">
+          <!-- <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search"> -->
+         <!-- <button class="btn btn-outline-success" type="submit">Search</button>-->
+
+        </form>
+      </div>
+      <div class="col-sm-9">
+        <div class="form-group form-inline float-right">
+          <button type="button" *ngIf="showAdmin || showSuperAdminComp"
+                  class="btn btn-primary mr-1" routerLink="/students/student-create/">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            Ajouter un elève
+          </button>
+          <div class="btn-group">
+            <div ngbDropdown class="d-inline-block"autoClose="outside" >
+              <button class="btn btn-secondary mr-1" id="export" ngbDropdownToggle>
+                <i class="fa fa-filter" aria-hidden="true"></i>
+                Exporter
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem type="button" class="btn btn-light btn-sm" (click)="downloadPDF()">
+                  <i class="fa fa-pdf"></i>
+                  PDF
+                </button>
+                <button type="button" class="btn btn-light btn-sm" ngbDropdownItem (click)="downloadExcel()">
+                  XLSX
+                </button>
+              </div>
+            </div>
+          </div>
+          <button type="button" *ngIf="showAdmin || showSuperAdminComp"
+                  class="btn btn-success mr-1" (click)="open(content)">
+            <i class="fa fa-upload"></i>
+            Importer
+          </button>
+          
+        </div>
+      </div>
+    </div>
+
+  <!-- <div class="form-group form-inline">Search <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="countryService.searchTerm" /><span class="ml-3" *ngIf="countryService.loading$ | async">Loading...</span></div> -->
+<table class="table table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Code</th>
+        <th scope="col" sbSortable="firstName" (sort)="onSort($event)">
+          <span>Prenom(s)</span>
+        </th>
+
+        <th scope="col" sbSortable="lastName"
+            (sort)="onSort($event)"><span>Nom</span>
+          </th>
+
+        <th scope="col" sbSortable="gender"
+            (sort)="onSort($event)"><span>Status</span>
+          </th>
+
+        <th scope="col" sbSortable="email"
+            (sort)="onSort($event)"><span>Trimestre1</span>
+          </th>
+
+          <th scope="col" sbSortable="email"
+          (sort)="onSort($event)"><span>Trimestre2</span>
+        </th>
+        <th scope="col" sbSortable="email"
+        (sort)="onSort($event)"><span>Trimestre3</span>
+      </th>
+        <th scope="col"><span>Actions</span></th>
+      </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let student of student$ |async">
+            <th scope="row">{{ student.code }}</th>
+            <th scope="row" class="card-link" (click)="viewStudent(student)">{{ student.firstName }}</th>
+            <th scope="row"  (click)="viewStudent(student)">{{ student.lastName }}</th>
+            <th scope="row" (click)="viewStudent(student)">{{ student.gender }}</th>
+            <th scope="row" (click)="viewStudent(student)">{{ student.email }}</th>
+            <th scope="row" (click)="viewStudent(student)">{{ student.course }}</th>
+            <th scope="row" (click)="viewStudent(student)">{{ student.email }}</th>
+            <th class="overflow-hidden">
+                  <div ngbDropdown container="body">
+                    <button class="btn btn-dark btn-sm" ngbDropdownToggle>
+                      <i class="fa fa-cog" aria-hidden="true"></i>
+                    </button>
+                    <div ngbDropdownMenu>
+                      <button class="btn btn-light btn-sm" ngbDropdownItem (click)="viewStudent(student)">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
+                          View</button>
+                          <div class="dropdown-divider"></div>
+                      <button class="btn btn-light btn-sm" ngbDropdownItem
+                              (click)="editStudent(student)"
+                      >
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                        Edit</button>
+                      <div class="dropdown-divider"></div>
+                      <button ngbDropdownItem class="btn btn-light btn-sm" (click)="deleteStudentModal(deleteModal,student)">
+                        <i class="fa fa-archive" aria-hidden="true"></i>
+                        Delete</button>
+                    </div>
+                  </div>
+            </th>
+          </tr>
+      </tbody>
+  </table>
+<!-- <div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="total$ | async" [(page)]="studentService.page" [pageSize]="studentService.pageSize"></ngb-pagination>
+  <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="studentService.pageSize">
+  <option [ngValue]="2">2 items per page</option>
+  <option [ngValue]="4">4 items per page</option>
+  <option [ngValue]="6">6 items per page</option>
+</select>
+</div> -->
+
+</form>

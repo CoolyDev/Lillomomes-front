@@ -1,0 +1,275 @@
+
+  <div class="row" *ngIf="id">
+    <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+    <div class="col-sm-2">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white" *ngIf="selectedEmploy?.id">
+            <i class="fa fa-id-card-o" aria-hidden="true"></i>
+           Code : {{selectedEmploy.id}}
+          </div>
+        </strong>
+        <div class="card-body">
+          <div class="card">
+            <img src="/assets/avatar/avatar-3.png" alt="employee-logo" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            {{selectedEmploy?.firstName}} {{selectedEmploy?.lastName}}
+          </div>
+        </strong>
+        <div class="card-body">
+          <form [formGroup]="editEmployForm" (validSubmit)="onSubmit(content)">
+
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">Personal Data</legend>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="firstname">Prenom(s)</label>
+                  <input type="text" class="form-control"
+                         formControlName="id" hidden>
+                  <input type="text" class="form-control" id="firstname"
+                         formControlName="firstName"
+                         placeholder="John">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="lastname">Last Name</label>
+                  <input type="text" class="form-control" id="lastname"
+                         formControlName="lastName"
+                         placeholder="Doe">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="gender">Gender</label>
+                  <select class="custom-select" (change)="changeGender($event)" id ="gender" formControlName="gender">
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="birthday">Birthday</label>
+                  <input type="date" class="form-control"
+                         formControlName="birthday"
+                         id="birthday" placeholder="23/01/1995">
+                </div>
+
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="businessPhone">Business Phone</label>
+                  <input class="form-control" type="tel"
+                         formControlName="businessPhone" placeholder="(+212)639607953"
+                         value="(+212)639607953" id="businessPhone">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="privatePhone">Private Phone</label>
+                  <input class="form-control" type="tel"
+                         formControlName="privatePhone" placeholder="(+212)639607953"
+                         value="(+212)639607953" id="privatePhone">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control"
+                         formControlName="email"
+                         id="email" placeholder="john@gmail.com">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="nationality">Nationality</label>
+                  <input type="text" class="form-control"
+                         formControlName="nationality"
+                         id="nationality" placeholder="Marocaine">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="status">Status</label>
+                  <select class="custom-select" (change)="changeStatus($event)" id ="status" formControlName="status">
+                    <option value="true">Active</option>
+                    <option value="false">Archive</option>
+                  </select>
+                </div>
+              </div>
+          
+            </fieldset>
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">Address</legend>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="address">Address</label>
+                  <input type="address" class="form-control"
+                         formControlName="address"
+                         id="address" placeholder="Casablanca">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control"
+                         formControlName="city"
+                         id="city" placeholder="Casablanca">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control"
+                         formControlName="country"
+                         id="country" placeholder="Maroc">
+                </div>
+
+              </div>
+            </fieldset>
+            <div class="float-right">
+              <button type="button" class="btn btn-danger mr-1">Cancel</button>
+              <button type="submit" class="btn btn-dark mr-1">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!id">
+    <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+    <div class="col-sm-2">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            Edit Picture
+          </div>
+        </strong>
+        <div class="card-body">
+          <div class="card">
+            <img src="/assets/avatar/newuserAvatar.png" alt="employee-logo" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            Create Employee
+          </div>
+        </strong>
+        <div class="card-body">
+          <form [formGroup]="createEmployForm" (validSubmit)="onSubmit(content)">
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">Personal Data</legend>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="firstname">Prenom(s)</label>
+                  <input type="text" class="form-control" id="firstname"
+                         formControlName="firstName"
+                         placeholder="John">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="lastname">Last Name</label>
+                  <input type="text" class="form-control" id="lastname"
+                         formControlName="lastName"
+                         placeholder="Doe">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="gender">Gender</label>
+                  <select class="custom-select" (change)="changeGender($event)" id ="gender" formControlName="gender">
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="birthday">Birthday</label>
+                  <input type="date" class="form-control"
+                         formControlName="birthday"
+                         id="birthday" placeholder="23/01/1995">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="businessPhone">Business Phone</label>
+                  <input class="form-control" type="tel"
+                         formControlName="businessPhone" placeholder="(+212)639607953"
+                         value="(+212)639607953" id="businessPhone">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="privatePhone">Private Phone</label>
+                  <input class="form-control" type="tel"
+                         formControlName="privatePhone" placeholder="(+212)639607953"
+                         value="(+212)639607953" id="privatePhone">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control"
+                         formControlName="email"
+                         id="email" placeholder="john@gmail.com">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="nationality">Nationality</label>
+                  <input type="text" class="form-control"
+                         formControlName="nationality"
+                         id="nationality" placeholder="Marocaine">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="status">Status</label>
+                  <select class="custom-select" (change)="changeStatus($event)" id ="status" formControlName="status">
+                    <option value="true">Active</option>
+                    <option value="false">Archive</option>
+                  </select>
+                </div>
+              </div>
+             
+            </fieldset>
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">Address</legend>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="address">Address</label>
+                  <input type="address" class="form-control"
+                         formControlName="address"
+                         id="address" placeholder="Casablanca">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control"
+                         formControlName="city"
+                         id="city" placeholder="Casablanca">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control"
+                         formControlName="country"
+                         id="country" placeholder="Maroc">
+                </div>
+
+              </div>
+            </fieldset>
+           
+            <div class="float-right">
+              <button type="button" class="btn btn-danger mr-1">Cancel</button>
+              <button type="submit" class="btn btn-dark mr-1">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Confirmation</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Operation successfully registered</p>
+    </div>
+  </ng-template>

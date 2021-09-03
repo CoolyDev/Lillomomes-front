@@ -1,0 +1,20 @@
+#layoutAuthentication {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  #layoutAuthentication_content {
+    min-width: 0;
+    flex-grow: 1;
+  }
+  #layoutAuthentication_footer {
+    min-width: 0;
+  }
+  #layoutAuthentication_content{
+   // background-image: url("assets/img/bg.jpg");
+    //background-color: #484848;
+  }
+}
+.form-control:focus {
+  border-color: #343A40;
+  box-shadow: 0 0 0 0.2rem #222831;
+}

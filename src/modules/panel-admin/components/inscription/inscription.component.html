@@ -1,0 +1,94 @@
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>  
+          </div>
+        </strong>
+        <div class="card-body">
+          <form  [formGroup]="inscriptionPaiement" (validSubmit)="onSubmit(content)">
+            <pre>{{inscriptionPaiement.value|json}}</pre>
+            <div class=form-row>
+              <div class="form-group col-md-6">
+                  <label for="nomEleve">Nom et Prenom(s)</label>
+                  <select class="custom-select" (change)="changeNom($event)" id ="nomEleve" formControlName="code">
+                      <option  *ngFor="let n of student$|async " [value]="n.code">{{n.firstName}} {{n.lastName}}</option>
+                  </select>
+                </div>
+              <div class="form-group col-md-6">
+                  <label for="typePaiement">Sélectionnez le type de paiement</label>
+                  <select class="custom-select" (change)="changePaiementType($event)" id ="typePaiement" formControlName="typePaiement">
+                    <option value="Espèce">Espèce</option>
+                    <option value="Chèque">Chèque</option>
+                    <option value="Transfert bancaire">Transfert bancaire</option>
+                  </select>
+              </div>
+             
+            </div>
+            <div class="form-row">        
+              <div class="form-group col-md-3">
+                <label for="inscriptionDate">Date</label>
+                <input type="date" class="form-control"
+                       formControlName="inscriptionDate"
+                       id="inscriptionDate" placeholder="23/01/1995">
+              </div>
+             
+            
+              <div class="form-group col-md-3">
+                <label for="montantTotal">Montant Total</label>
+                <input type='text' class="form-control"
+                       formControlName="montantTotal" (change)="montantCalcul()"
+                       id="montantTotal" placeholder="2.500">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="trimestre">Sélectionnez le trimestre</label>
+                <select class="custom-select" (change)="changeTrimestre($event)" id ="trimestre" formControlName="trimestreSelect">
+                  <option value="Trimestre1">Trimestre1</option>
+                  <option value="Trimestre2">Trimestre2</option>
+                  <option value="Trimestre3">Trimestre3</option>
+                </select>
+            </div>    
+              <div class="form-group col-md-3">
+                <label>Mensualité</label>
+                  <ng-multiselect-dropdown
+                          name="mensualite"
+                          [placeholder]="'Selectionnez le mois'"
+                          [data]="nosMensualites"
+                          formControlName="mensualiteInscription"
+                          [settings]="dropdownSettingMensualite"
+                          (onSelect)="onItemSelect($event)">
+                  </ng-multiselect-dropdown>
+              </div>
+            </div>
+            <div class="form-row">    
+              <div class="form-group col-md-3">
+                <label for="montantPaye">Montant Payé</label>
+                <input type='text' mask="separator.2" thousandSeparator="." class="form-control" suffix=" Dh" 
+                       formControlName="montantPaye" [disabled]="true"
+                       id="montantPaye" placeholder="1.500">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="montantRestant">Reste à Payé</label>
+                <input type='text' mask="separator.2" thousandSeparator="." class="form-control" suffix=" Dh" 
+                formControlName="montantRestant" [disabled]="true"
+                id="montantRestant" placeholder="500">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inscriptionComment">Commentaire </label>
+                <textarea  type="text" class="form-control" id="inscriptionComment"
+                       formControlName="inscriptionComment"
+                       placeholder="Laissez un commentaire" rows="3">
+                </textarea>
+              </div>
+            </div>
+            <div class="float-right">
+              <button type="button" class="btn btn-danger mr-1" routerLink="/comptabilite/paiement">Annuler</button>
+              <button type="submit" class="btn btn-dark mr-1">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

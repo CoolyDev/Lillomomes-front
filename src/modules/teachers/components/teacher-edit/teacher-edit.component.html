@@ -1,0 +1,158 @@
+
+  <div class="row" *ngIf="id">
+    <div class="col-sm-2">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white" *ngIf="selectedTeacher?.idTeacher">
+            <i class="fa fa-id-card-o" aria-hidden="true"></i>
+           Code : {{selectedTeacher.idTeacher}}
+          </div>
+        </strong>
+        <div class="card-body">
+          <div class="card">
+            <img src="/assets/avatar/avatar-3.png" alt="employee-logo" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            {{selectedTeacher?.firstName}} {{selectedTeacher?.lastName}}
+          </div>
+        </strong>
+        <div class="card-body">
+          <form [formGroup]="editTeacherForm" (validSubmit)="onSubmit()">
+           <pre>
+              {{editTeacherForm.value|json}}
+           </pre>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="lastname">Last name</label>
+                <input type="text" class="form-control" id="lastname"
+                       formControlName="lastName"
+                       placeholder="John">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="firstname">Prenom(s)</label>
+                <input type="text" class="form-control" id="firstname"
+                       formControlName="firstName"
+                       placeholder="Doe">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="email">Email</label>
+                <input type="email" class="form-control"
+                       formControlName="email"
+                       id="email" placeholder="john@gmail.com">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="privatePhone">Private Phone</label>
+                <input class="form-control" type="tel"
+                       formControlName="privatePhone" placeholder="(+212)639607953"
+                       value="(+212)639607953" id="privatePhone">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="gender">Sex</label>
+                <select class="custom-select" (change)="changeGender($event)" id ="gender" formControlName="gender">
+                  <option value="M">M</option>
+                  <option value="F">F</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="jobRole">Job Role</label>
+                <input class="form-control" type="text"
+                       formControlName="jobRole" placeholder="Software developper"
+                       value="" id="jobRole">
+              </div>
+            </div>
+            <div class="float-right">
+              <button type="button" class="btn btn-danger mr-1" routerLink="/employees">Annuler</button>
+              <button type="submit" class="btn btn-dark mr-1">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!id">
+    <div class="col-sm-2">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            Edit picture
+          </div>
+        </strong>
+        <div class="card-body">
+          <div class="card">
+            <img src="/assets/avatar/newuserAvatar.png" alt="employee-logo" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            Create teacher
+          </div>
+        </strong>
+        <div class="card-body">
+          <form [formGroup]="createTeacherForm" (validSubmit)="onSubmit()">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="lastname">Last name</label>
+                <input type="text" class="form-control" id="lastname"
+                       formControlName="lastName"
+                       placeholder="John">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="firstname">Prenom(s)</label>
+                <input type="text" class="form-control" id="firstname"
+                       formControlName="firstName"
+                       placeholder="Doe">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="email">Email</label>
+                <input type="email" class="form-control"
+                       formControlName="email"
+                       id="email" placeholder="john@gmail.com">
+              </div>
+              <div class="form-group col-md-1">
+                <label for="gender">Sex</label>
+                <select class="custom-select" (change)="changeGender($event)" id ="gender" formControlName="gender">
+                  <option value="M">M</option>
+                  <option value="F">F</option>
+                </select>
+              </div>
+              <div class="form-group col-md-5">
+                <label for="privatePhone">Private Phone</label>
+                <input class="form-control" type="tel"
+                       formControlName="privatePhone"
+                       placeholder="(+212)639607953" id="privatePhone">
+              </div>
+            </div>
+            <div class="float-right">
+              <button type="button" class="btn btn-danger mr-1" routerLink="/teacher">Annuler</button>
+              <button type="submit" class="btn btn-dark mr-1">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

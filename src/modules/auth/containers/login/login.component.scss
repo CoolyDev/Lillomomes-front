@@ -1,0 +1,5 @@
+@import 'styles/variables.scss';
+.form-control:focus {
+  border-color: #343A40;
+  box-shadow: 0 0 0 0.2rem #222831;
+}

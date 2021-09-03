@@ -1,0 +1,161 @@
+
+  <div class="row" *ngIf="id">
+    <div class="col-sm-12">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+          </div>
+        </strong>
+        <div class="card-body">
+          <form [formGroup]="editCourseForm" (validSubmit)="onSubmit(content)">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="courseLevel">Course Level</label>
+                <input type="text" class="form-control" id="idCourses" hidden>
+                <input type="text" class="form-control" id="courseLevel"
+                       formControlName="courseLevel"
+                       placeholder="A 1">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="courseName">Course Name</label>
+                <input type="text" class="form-control" id="courseName"
+                       formControlName="courseName"
+                       placeholder="A 1.1">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="courseUnit">Course Unit</label>
+                <input class="form-control" type="text"
+                       formControlName="courseUnit" placeholder="50"
+                       value="" id="courseUnit">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="coursePrice">Course Price</label>
+                <input class="form-control" type="text"
+                       formControlName="coursePrice" placeholder="2500"
+                       value="" id="coursePrice">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="institution">Institution</label>
+                <ng-multiselect-dropdown
+                        name="institution"
+                        [placeholder]="'Select Institution'"
+                        [data]="institution$|async"
+                        formControlName="institution"
+                        [settings]="dropdownSettingsInstitution"
+                        (onSelect)="onItemSelect($event)">
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="coursePrice">Status</label>
+                <select class="custom-select" (change)="changeStatus($event)" id ="courseStatus" formControlName="courseStatus">
+                  <option value="true">Available</option>
+                  <option value="false">Unavailable</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="courseComment">Course Comment</label>
+                <textarea  type="text" class="form-control" id="courseComment"
+                       formControlName="courseComment"
+                       placeholder="Good" rows="3">
+                </textarea>
+              </div>
+            </div>
+            <div class="float-right">
+              <button type="button" class="btn btn-danger mr-1" routerLink="/courses">Annuler</button>
+              <button type="submit" class="btn btn-dark mr-1">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!id">
+    <div class="col-sm-12">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            Create course
+          </div>
+        </strong>
+        <div class="card-body">
+          <form [formGroup]="createCourseForm" (validSubmit)="onSubmit(content)">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="courseLevel">Course Level</label>
+                <input type="text" class="form-control" id="idCourses" hidden>
+                <input type="text" class="form-control" id="courseLevel"
+                       formControlName="courseLevel"
+                       placeholder="A 1">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="courseName">Course Name</label>
+                <input type="text" class="form-control" id="courseName"
+                       formControlName="courseName"
+                       placeholder="A 1.1">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="courseUnit">Course Unit</label>
+                <input class="form-control" type="text"
+                       formControlName="courseUnit" placeholder="50"
+                       value="" id="courseUnit">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="coursePrice">Course Price</label>
+                <input class="form-control" type="text"
+                       formControlName="coursePrice" placeholder="2500"
+                       value="" id="coursePrice">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="institution">Institution</label>
+                <select class="custom-select"id ="institution" formControlName="institution">
+                  <option value="inst" class="custom-select" *ngFor="let inst of institution$|async">{{inst.institutionName}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="coursePrice">Status</label>
+                <select class="custom-select" (change)="changeStatus($event)" id ="courseStatus" formControlName="courseStatus">
+                  <option value="true">Available</option>
+                  <option value="false">Unavailable</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="courseComment">Course Comment</label>
+                <textarea  type="text" class="form-control" id="courseComment"
+                           formControlName="courseComment"
+                           placeholder="Good" rows="3">
+                </textarea>
+              </div>
+            </div>
+            <div class="float-right">
+              <button type="button" class="btn btn-danger mr-1" routerLink="/courses">Annuler</button>
+              <button type="submit" class="btn btn-dark mr-1">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Confirmation</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Operation successfully registered</p>
+    </div>
+  </ng-template>

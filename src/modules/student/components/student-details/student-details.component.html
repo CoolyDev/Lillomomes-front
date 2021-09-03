@@ -1,0 +1,282 @@
+
+<!---->
+<div class="row">
+  <div class="col-sm-2">
+    <div class="card bg-light">
+      <strong class="card-header bg-dark">
+        <span class="text-light">
+          <i class="fa fa-id-card-o" aria-hidden="true"></i>
+         Code : {{selectedStudentDetails?.code}}
+        </span>
+      </strong>
+      <div class="card-body">
+        <div class="card">
+          <img src="/assets/avatar/avatar-3.png" alt="employee-lo go" class="img-thumbnail">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-10">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>Informations personnelles</a>
+        <ng-template ngbNavContent>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card bg-light">
+                        <strong class="card-header bg-dark">
+                      <span class="text-light">
+                       <i class="fa fa-list" aria-hidden="true"></i> Informations personnelles
+                      </span>
+                        </strong>
+                        <div class="card-body">
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border">Informations Générales</legend>
+                                <p>
+                                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                                    <strong> Prenom(s):</strong>
+                                    {{selectedStudentDetails.firstName}}
+                                </p>
+                                <p>
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <strong> Nom:</strong>
+                                    {{selectedStudentDetails.lastName}}
+                                </p>
+
+                                <p>
+                                    <i class="fa fa-venus" aria-hidden="true"></i>
+                                    <strong> Genre:</strong>
+                                    {{selectedStudentDetails.gender}}
+                                </p>
+
+                                <p>
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <strong> Birthday:</strong>
+                                    {{selectedStudentDetails.birthday}}
+                                </p>
+                                <p>
+                                    <i class="fa fa-flag" aria-hidden="true"></i>
+
+                                    <strong> Nationality:</strong>
+                                    {{selectedStudentDetails.nationality}}
+                                </p>
+                                 
+                            </fieldset>
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border">Adresse</legend>
+                                <p>
+                                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    <strong> Adresse:</strong>
+                                    {{selectedStudentDetails.address}}
+                                </p>
+                                <p>
+                                  <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                    <strong> Ville:</strong>
+                                    {{selectedStudentDetails.city}}
+                                </p>
+                            </fieldset>
+
+                            <!-- <p>
+                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                 <strong> Work Location:</strong>
+                                 {{selectedStudentDetails.workLocation}}
+                             </p>
+                             <p>
+                                 <i class="fa fa-suitcase" aria-hidden="true"></i>
+                                 <strong> Status:</strong>
+                                 {{selectedStudentDetails.status}}
+                             </p>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-template #femaleAvatar>
+                <div class="card">
+                    <img src="/assets/avatar/avatar-F.png" alt="employee-lo go" class="img-thumbnail">
+                </div>
+            </ng-template>
+
+        </ng-template>
+    </li>
+    
+      <!-- <li [ngbNavItem]="2">
+        <a ngbNavLink>Educational Background</a>
+        <ng-template ngbNavContent>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card bg-light">
+                <strong class="card-header bg-dark">
+      <span class="text-light">
+          <i class="fa fa-list" aria-hidden="true"></i>
+          Educational Background
+      </span>
+                </strong>
+                <div class="card-body">
+                  <p>
+                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                    <strong> Profession : </strong>
+                    {{selectedStudentDetails.profession}}
+                  </p>
+                  <p>
+                    <i class="fa fa-building" aria-hidden="true"></i>
+                    <strong> School Name : </strong>
+                    {{selectedStudentDetails.schoolName}}
+                  </p>
+                 
+                  <p>
+                    <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                    <strong> School Place : </strong>
+                    {{selectedStudentDetails.schoolPlace}}
+                  </p>
+
+                  <p>
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    <strong> School Type : </strong>
+                    {{selectedStudentDetails.schoolType}}
+                  </p>
+
+                  <p>
+                    <i class="fa fa-book" aria-hidden="true"></i>
+                    <strong> Niveau Etude: </strong>
+                    {{selectedStudentDetails.niveauEtude}}
+                  </p>
+
+                  <p>
+                    <i class="fa fa-building-o" aria-hidden="true"></i>
+                    <strong> System Etude: </strong>
+                    {{selectedStudentDetails.systemEtude}}
+                  </p>
+
+                  <p>
+                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                    <strong> Serie Bac: </strong>
+                    {{selectedStudentDetails.serieBac}}
+                  </p>
+
+                  <p>
+                    <i class="fa fa-leanpub" aria-hidden="true"></i>
+                    <strong> Moyenne Bac: </strong>
+                    {{selectedStudentDetails.moyenneBac}}
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </ng-template>
+      </li> -->
+      <li [ngbNavItem]="3">
+        <a ngbNavLink> Personnes à prévenir</a>
+        <ng-template ngbNavContent>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card bg-light">
+                        <strong class="card-header bg-dark">
+                      <span class="text-light">
+                          <i class="fa fa-list" aria-hidden="true"></i>
+                        Personnes à prévenir
+                      </span> </strong>
+                        <div class="card-body">
+                            <div *ngFor="let ec of selectedStudentDetails?.emergencyContacts;let i=index">
+                                <div class="card mb-3">
+                                    <div class="card-header bg-dark text-light">
+                                      Contact {{i+1}}
+                                    </div>
+                                    <p class="ml-2">
+                                         <i class="fa fa-user-o" aria-hidden="true"></i>
+                                        <strong> Prenom(s):</strong>
+                                        <span>{{ec.firstName}}</span>
+                                    </p>
+                                    <p class="ml-2">
+                                         <i class="fa fa-user" aria-hidden="true"></i>
+                                        <strong> Nom:</strong>
+                                        <span>
+                                     {{ec.lastName}}
+                                </span>
+                                    </p>
+                                    <p class="ml-2">
+                                        <i class="fa fa-venus" aria-hidden="true"></i>
+                                        <strong> Genre:</strong>
+                                        <span>
+                                     {{ec.gender}}
+                                </span>
+                                    </p>
+                                    <p class="ml-2">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        <strong> Email:</strong>
+                                        <span>
+                                     {{ec.email}}
+                                </span>
+                                    </p>
+                                    <p class="ml-2">
+                                        <i class="fa fa-mobile" aria-hidden="true"></i>
+                                        <strong> Téléphone 1:</strong>
+                                        <span>
+                                     {{ec.phone1}}
+                                </span>
+                                    </p>
+                                  <p class="ml-2">
+                                       <i class="fa fa-phone" aria-hidden="true"></i>
+                                        <strong> Téléphone 2:</strong>
+                                        <span>
+                                     {{ec.phone2}}
+                                </span>
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </ng-template>
+    </li>
+
+
+    <!-- <li [ngbNavItem]="4">
+      <a ngbNavLink> Institution</a>
+      <ng-template ngbNavContent>
+          <div class="row">
+              <div class="col-sm-12">
+                  <div class="card bg-light">
+                      <strong class="card-header bg-dark">
+                    <span class="text-light">
+                        <i class="fa fa-list" aria-hidden="true"></i>
+                        Institution
+                    </span> </strong>
+                      <div class="card-body">
+                          <p>
+                              <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                              <strong> Institution: </strong>
+                              <span *ngFor="let i of selectedStudentDetails?.institutions"
+                                     class="badge mr-2"
+                                    [class.badge-warning]="i.institutionName === 'GAL'"
+                                    [class.badge-primary]="i.institutionName === 'GUM'"
+                                    [class.badge-danger]="i.institutionName === 'STK'">
+                                         {{i.institutionName}}
+                                        </span>
+                          </p>
+                     <p>
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                     <strong> Enrollment Date: </strong>
+                     <span>{{selectedStudentDetails.enrollmentDate}}</span>
+                 </p>
+                      </div>
+                  </div>
+
+              </div>
+
+          </div>
+      </ng-template>
+  </li> -->
+   
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
+</div>
+
+

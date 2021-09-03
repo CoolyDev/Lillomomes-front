@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card bg-light">
+            <strong class="card-header bg-dark">
+                  <span class="text-light">
+                   <i class="fa fa-list" aria-hidden="true"></i>
+                       Course Details
+                  </span>
+            </strong>
+            <div class="card-body">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Basic Information</legend>
+                    <div class="col-sm-9">
+                        <p class="text-truncate">
+                            <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                            <span>
+                            Name :
+                       </span> {{selectedCourse.courseName}}
+                        </p>
+                        <p class="text-truncate">
+                            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            <span>
+                            Level :
+                       </span> {{selectedCourse.courseLevel}}
+                        </p>
+                        <p class="text-truncate">
+                            <i class="fa fa-building" aria-hidden="true"></i>
+                            Institution : {{selectedCourse?.institution?.institutionName}}
+                        </p>
+                        <p class="text-truncate">
+                            <i class="fa fa-hourglass-start" aria-hidden="true"></i>
+                            UE :  {{selectedCourse.courseUnit}}
+                        </p>
+                        <p class="text-truncate">
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                            Price : {{selectedCourse.coursePrice}} MAD
+                        </p>
+
+                        <div *ngIf="selectedCourse?.courseStatus">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                            Status:   <span class="badge badge-success">Available</span>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Description</legend>
+                    <p  class="lh-1">
+                        {{selectedCourse.courseDescription}}
+                    </p>
+
+                </fieldset>
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Comment</legend>
+                    <p  class="lh-1">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

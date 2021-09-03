@@ -1,0 +1,463 @@
+{
+  "employees": [
+    {
+      "firstName": "Chancerel",
+      "lastName": "Codjovi",
+      "gender": "M",
+      "jobRole": "IT Manager",
+      "departement": "IT",
+      "email": "codjovi@germanacademy.education",
+      "businessPhone": "0639607953",
+      "privatePhone": "0639607953",
+      "workLocation": "Marrakech",
+      "status": "Employee",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "firstName": "Tranquillin",
+      "lastName": "Akotegnon",
+      "gender": "M",
+      "jobRole": "IT Support Engineer",
+      "departement": "IT",
+      "email": "akotegnon@germanacademy.education",
+      "businessPhone": "",
+      "privatePhone": "0639607953",
+      "workLocation": "Casablanca",
+      "status": "Employee",
+      "isArchived": true
+    },
+    {
+      "id": 3,
+      "firstName": "Cephas",
+      "lastName": "Zoubga",
+      "gender": "M",
+      "jobRole": "Software Developer",
+      "departement": "IT",
+      "email": "zoubga@germanacademy.education",
+      "businessPhone": "",
+      "privatePhone": "0639607953",
+      "workLocation": "Marrakech",
+      "status": "Intern",
+      "isArchived": true,
+      "roles": {
+        "id": 1,
+        "name": "ROLE_USER"
+      }
+    },
+    {
+      "firstName": "Khaoula",
+      "lastName": "Chahi",
+      "gender": "F",
+      "jobRole": "Admission Manager",
+      "departement": "Admission",
+      "email": "cool",
+      "businessPhone": "",
+      "privatePhone": "0639607953",
+      "workLocation": "Casablanca",
+      "status": "Employee",
+      "id": 4,
+      "roles": {
+        "id": 1,
+        "name": "ROLE_USER"
+      }
+    },
+    {
+      "id": 5,
+      "firstName": "Lamiae",
+      "lastName": "Akdim",
+      "gender": "F",
+      "jobRole": "Admission Manager",
+      "departement": "Admission",
+      "email": "akdim@germanacademy.education",
+      "businessPhone": "0639607953",
+      "privatePhone": "0639607953",
+      "workLocation": "Marrakech",
+      "status": "Employee",
+      "isArchived": false,
+      "roles": {
+        "id": 1,
+        "name": "ROLE_USER"
+      }
+    },
+    {
+      "id": 6,
+      "firstName": "Rebecca",
+      "lastName": "Basse",
+      "gender": "F",
+      "jobRole": "Sales Manager",
+      "departement": "Sales & Marketing",
+      "email": "basse@germanacademy.education",
+      "businessPhone": "0639607953",
+      "privatePhone": "0639607953",
+      "workLocation": "Casablanca",
+      "status": "Employee",
+      "isArchived": false,
+      "roles": {
+        "id": 1,
+        "name": "ROLE_USER"
+      }
+    },
+    {
+      "firstName": "Cephas",
+      "lastName": "Cooly",
+      "gender": "M",
+      "jobRole": "Software Developer",
+      "departement": "1",
+      "email": "cephaszoubga@gmail.com",
+      "businessPhone": "",
+      "privatePhone": "0639607953",
+      "workLocation": "Casablanca",
+      "status": "Employee",
+      "id": 8,
+      "isArchived": false,
+      "roles": {
+        "id": 1,
+        "name": "ROLE_USER"
+      }
+    },
+    {
+      "firstName": "Doe",
+      "lastName": "John",
+      "gender": "M",
+      "jobRole": "Software Developer",
+      "departement": "IT",
+      "email": "john@gmail.com",
+      "businessPhone": "0639607953",
+      "privatePhone": "0639607953",
+      "workLocation": "Casablanca",
+      "status": "Intern",
+      "id": 9,
+      "isArchived": false,
+      "roles": {
+        "id": 1,
+        "name": "ROLE_USER"
+      }
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "code": "1412",
+      "firstName": "Zakaria",
+      "lastName": "Benabid",
+      "gender": "M",
+      "email": "benabidzakaria123@gmail.com",
+      "phone1": "0669501360",
+      "phone2": "",
+      "cityOfResidence": "Casablanca",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "",
+          "lastName": "",
+          "gender": "",
+          "phone1": "",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 2,
+      "code": "1400",
+      "firstName": "Salim",
+      "lastName": "Aymen",
+      "gender": "M",
+      "email": "salimaymen2003@gmail.com",
+      "phone1": "0767011511",
+      "phone2": "",
+      "cityOfResidence": "Casablanca",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "Mohammed",
+          "lastName": "Salim",
+          "gender": "M",
+          "phone1": "0662033345",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 3,
+      "code": "1112",
+      "firstName": "Badreddine",
+      "lastName": "Ouali",
+      "gender": "M",
+      "email": "badrouali.badrouali@gmail.com",
+      "phone1": "0662081782",
+      "phone2": "",
+      "cityOfResidence": "Rabat",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "",
+          "lastName": "Ouali",
+          "gender": "M",
+          "phone1": "0661878456",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 4,
+      "code": "931",
+      "firstName": "Mohamed Amine",
+      "lastName": "Chadi",
+      "gender": "M",
+      "email": "chadiamine664@gmail.com",
+      "phone1": "0661732895",
+      "phone2": "",
+      "cityOfResidence": "Casablanca",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "",
+          "lastName": "Chadi",
+          "gender": "F",
+          "phone1": "0661928196",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 5,
+      "code": "1456",
+      "firstName": "Assia",
+      "lastName": "Belmajdoub",
+      "gender": "F",
+      "email": "assia.mankor@gmail.com",
+      "phone1": "0662625910",
+      "phone2": "",
+      "cityOfResidence": "Marrakech",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "",
+          "lastName": "Belmajdoub",
+          "gender": "F",
+          "phone1": "0661343045",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 6,
+      "code": "1454",
+      "firstName": "Hiba",
+      "lastName": "Bouraouda",
+      "gender": "F",
+      "email": "hiba.bouraouda@gmail.com",
+      "phone1": "0659667762",
+      "phone2": "",
+      "cityOfResidence": "Settat",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "Slimani",
+          "lastName": "Badia",
+          "gender": "F",
+          "phone1": "0662783533",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 7,
+      "code": "1453",
+      "firstName": "Taha",
+      "lastName": "Ablali",
+      "gender": "M",
+      "email": "tablali148@gmail.com",
+      "phone1": "0617833833",
+      "phone2": "",
+      "cityOfResidence": "Casablanca",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "",
+          "lastName": "Ablali",
+          "gender": "F",
+          "phone1": "0663636306",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 8,
+      "code": "1054",
+      "firstName": "Hiba",
+      "lastName": "Ablali",
+      "gender": "F",
+      "email": "hiba.ablali13@gmail.com",
+      "phone1": "0614586245",
+      "phone2": "",
+      "cityOfResidence": "Casablanca",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "",
+          "lastName": "Ablali",
+          "gender": "F",
+          "phone1": "0663636306",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 9,
+      "code": "727",
+      "firstName": "Slimane",
+      "lastName": "Elouafi",
+      "gender": "F",
+      "email": "slimane.elouafi98@gmail.com",
+      "phone1": "0651999010",
+      "phone2": "",
+      "cityOfResidence": "Marrakech",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "Moulay Hassan",
+          "lastName": "Elouafi",
+          "gender": "M",
+          "phone1": "0661248434",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 10,
+      "code": "1149",
+      "firstName": "Reda",
+      "lastName": "Kabbaj",
+      "gender": "F",
+      "email": "kabbajreda2002@gmail.com",
+      "phone1": "0600419481",
+      "phone2": "",
+      "cityOfResidence": "Laayoune",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "Mohammed",
+          "lastName": "Kabbaj",
+          "gender": "M",
+          "phone1": "0662399042",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 11,
+      "code": "1455",
+      "firstName": "Anouar",
+      "lastName": "Lachgar",
+      "gender": "M",
+      "email": "lachgar.ano94@gmail.com",
+      "phone1": "0627128554",
+      "phone2": "",
+      "cityOfResidence": "Kénitra",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "Hassan",
+          "lastName": "Lachgar",
+          "gender": "M",
+          "phone1": "",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 12,
+      "code": "817",
+      "firstName": "Adam",
+      "lastName": "Kadiri",
+      "gender": "M",
+      "email": "adamkadiri127@gmail.com",
+      "phone1": "0650013334",
+      "phone2": "",
+      "cityOfResidence": "Casablanca",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "",
+          "lastName": "Kadiri",
+          "gender": "F",
+          "phone1": "0671216111",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "id": 13,
+      "code": "249",
+      "firstName": "Habibi",
+      "lastName": "Wael",
+      "gender": "M",
+      "email": "wael.habibi2002@gmail.com",
+      "phone1": "0650013334",
+      "phone2": "",
+      "cityOfResidence": "Settat",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "parents": [
+        {
+          "firstName": "",
+          "lastName": "Kilani",
+          "gender": "F",
+          "phone1": "0636542142",
+          "phone2": ""
+        }
+      ],
+      "comment": ""
+    },
+    {
+      "firstName": "John",
+      "lastName": "Doe",
+      "gender": "M",
+      "email": "john@gmail.com",
+      "phone1": "0639607953",
+      "phone2": "",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "cityOfResidence": "Fès",
+      "id": 14
+    },
+    {
+      "firstName": "John",
+      "lastName": "Belmajdoub",
+      "gender": "M",
+      "email": "john@gmail.com",
+      "phone1": "0639607953",
+      "phone2": "",
+      "inscriptionDateAtGA": "",
+      "course": "A2.1",
+      "cityOfResidence": "Tanger",
+      "id": 15
+    }
+  ]
+}

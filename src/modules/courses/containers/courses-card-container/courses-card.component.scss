@@ -1,0 +1,8 @@
+@import 'styles/variables.scss';
+.dropdown-toggle::after {
+  display:none;
+}
+.btn-light:hover{
+  color: #fff;
+  background-color: black;
+}

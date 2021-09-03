@@ -1,0 +1,242 @@
+<div class="row" *ngIf="!isEditProfil">
+    <div class="col-sm-2">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <span class="text-light">
+         <i class="fa fa-id-card-o" aria-hidden="true"></i>
+        Code :  {{selectedEmploy.id}}
+          </span>
+        </strong>
+        <div class="card-body">
+        <div class="card" *ngIf="selectedEmploy.gender=='M' else femaleAvatar">
+            <img src="/assets/avatar/avatar-3.png" alt="employee-lo go" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+        <span class="text-light">
+         <i class="fa fa-list" aria-hidden="true"></i> Employee profile
+        </span>
+        <div class="float-right">
+          <button class="btn btn-dark" (click)="editProfil()">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+           </button>
+        </div>
+        </strong>
+        <div class="card-body">
+          <p>
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <strong> Last name:</strong>
+            {{selectedEmploy.lastName}}
+          </p>
+          <p>
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+            <strong> First name:</strong>
+            {{selectedEmploy.firstName}}
+          </p>
+          <p>
+            <i class="fa fa-venus" aria-hidden="true"></i>
+            <strong> Sex:</strong>
+            {{selectedEmploy.gender}}
+          </p>
+          <p>
+            <i class="fa fa-briefcase" aria-hidden="true"></i>
+            <strong> Role:</strong>
+            {{selectedEmploy.jobRole}}
+          </p>
+          <p>
+            <i class="fa fa-desktop" aria-hidden="true"></i>
+            <strong> Departement:</strong>
+            {{selectedEmploy.department}}
+          </p>
+          <p>
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <strong> Email:</strong>
+            {{selectedEmploy.email}}
+          </p>
+          <p>
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            <strong> Business Phone:</strong>
+            {{selectedEmploy.businessPhone}}
+          </p>
+          <p>
+            <i class="fa fa-mobile" aria-hidden="true"></i>
+            <strong> Private Phone:</strong>
+            {{selectedEmploy.privatePhone}}
+          </p>
+          <p>
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            <strong> Work Location:</strong>
+            {{selectedEmploy.workLocation}}
+          </p>
+          <p>
+            <i class="fa fa-suitcase" aria-hidden="true"></i>
+            <strong> Status:</strong>
+            {{selectedEmploy.status}}
+          </p>
+          <p>
+            <i class="fa fa-key" aria-hidden="true"></i>
+            <strong> Password:</strong>
+            ************************************
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #femaleAvatar>
+    <div class="card">
+      <img src="/assets/avatar/avatar-F.png" alt="employee-lo go" class="img-thumbnail">
+    </div>
+  </ng-template>
+
+
+  <div class="row" *ngIf="isEditProfil">
+    <div class="col-sm-2">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-id-card-o" aria-hidden="true"></i>
+           Code : {{selectedEmploy.id}}
+          </div>
+
+        </strong>
+        <div class="card-body">
+          <div class="card">
+            <img src="/assets/avatar/avatar-3.png" alt="employee-logo" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <span class="text-light">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            {{selectedEmploy.firstName}} {{selectedEmploy.lastName}}
+          </span>
+          <div class="float-right">
+          <button class="btn btn-dark" (click)="editProfil()">
+            <i class="fa fa-user" aria-hidden="true"></i>
+           </button>
+        </div>
+        </strong>
+        <div class="card-body">
+          <form [formGroup]="editEmployForm" (validSubmit)="onSubmit()">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="lastname">Last name</label>
+                <input type="text" class="form-control" id="lastname"
+                       formControlName="lastName"
+                       placeholder="John">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="firstname">Prenom(s)</label>
+                <input type="text" class="form-control" id="firstname"
+                       formControlName="firstName"
+                       placeholder="Doe">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="email">Email</label>
+                <input type="email" class="form-control"
+                       formControlName="email"
+                       id="email" placeholder="john@gmail.com">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="workLocation">Work Location</label>
+                <input type="text" class="form-control"
+                       formControlName="workLocation" placeholder="Casablanca"
+                       id="workLocation">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="businessPhone">Business Phone</label>
+                <input class="form-control" type="tel"
+                       formControlName="businessPhone" placeholder="(+212)639607953"
+                       value="(+212)639607953" id="businessPhone">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="privatePhone">Private Phone</label>
+                <input class="form-control" type="text" hidden
+                       formControlName="id" placeholder="(+212)639607953"
+                       value="(+212)639607953" id="id">
+                <input class="form-control" type="tel"
+                       formControlName="privatePhone" placeholder="(+212)639607953"
+                       value="(+212)639607953" id="privatePhone">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="gender">Sex</label>
+                <select class="custom-select" (change)="changeGender($event)" id ="gender" formControlName="gender">
+                  <option value="M">M</option>
+                  <option value="F">F</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="gender">Status</label>
+                <select class="custom-select" (change)="changeStatus($event)" id ="status" formControlName="status">
+                  <option value="Employee">Employee</option>
+                  <option value="Intern">Intern</option>
+                  <option value="Freelancer">Freelancer</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="jobRole">Job Role</label>
+                <input class="form-control" type="text"
+                       formControlName="jobRole"
+                       value="" id="jobRole">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="department">Department</label>
+                <select class="form-control custom-select" (change)="changeDepartment($event)" id ="department" formControlName="department">
+                  <option *ngFor="let department of eDepartments | keyvalue" [ngValue]="department.key">{{department.value}}</option>
+                </select>
+              </div>
+
+            </div>
+            <!--<div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="password">Password</label>
+                <input class="form-control" type="text"
+                       formControlName="password" placeholder="********"
+                       value="" id="password">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="Cpassword">New password</label>
+                <input class="form-control" type="text"
+                       formControlName="Cpassword" placeholder="********"
+                       value="" id="Cpassword">
+              </div>
+            </div>-->
+            <!-- <div class="form-row" *ngIf="showSuperAdminComp">
+              <div class="form-group col-md-3">
+                <label for="roles">Role</label>
+                <select class="custom-select"  id ='roles'(change)="changeRole($event)" formControlName="roles">
+                  <option *ngFor="let role of eRole | keyvalue" [ngValue]="role.key">{{role.value}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row" *ngIf="showAdminComp">
+              <div class="form-group col-md-6">
+                <label for="roles">Role</label>
+                <select class="custom-select" (change)="changeRole($event)" id ="roles" formControlName="roles">
+                  <option value="ROLE_MODERATOR">Moderator</option>
+                </select>
+              </div>
+            </div> -->
+            <div class="float-right">
+              <button type="button" class="btn btn-danger mr-1" (click)="dismiss()">Annuler</button>
+              <button type="submit" class="btn btn-dark mr-1" (click)="onSubmit()">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

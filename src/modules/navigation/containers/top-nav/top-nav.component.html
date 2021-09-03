@@ -1,0 +1,78 @@
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/dashboard">
+    <img class="navbar-brand" src="assets/img/Logo.png"/>
+    </a>
+    <!-- <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" data-cy="topNavToggleSideNav" (click)="toggleSideNav()"><fa-icon [icon]='["fas", "bars"]'></fa-icon></button> -->
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0  ml-5">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="showAdminComp || showSuperAdminComp || showUser">
+          <a class="nav-link" routerLink="/employees">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            Employees</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/students">
+                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                Elèves
+            </a>
+          </li>
+        <div ngbDropdown class="d-inline-block">
+            <button class="btn nav-link" id="dropdownBasic1" ngbDropdownToggle>
+                <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                Planification</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="btn btn-light btn-sm"  ngbDropdownItem routerLink="/courses/course-planned-list">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                    Planned Course</button>
+                <button ngbDropdownItem  class="btn btn-light btn-sm" routerLink="/courses">
+                    <i class="fa fa-list-ul" aria-hidden="true"></i>
+                    Course Catalog</button>
+            </div>
+        </div>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/rooms">
+                <i class="fa fa-slideshare" aria-hidden="true"></i>
+                Rooms
+            </a>
+        </li>
+        <!-- <li class="nav-item">
+            <a class="nav-link" routerLink="/comptabilite">
+                <i class="fa fa-money" aria-hidden="true"></i>
+                Comptabilite
+            </a>
+        </li> -->
+        <div ngbDropdown class="d-inline-block">
+            <button class="btn nav-link" id="dropdownBasic1" ngbDropdownToggle>
+                <i class="fa fa-money" aria-hidden="true"></i>
+                Comptabilite</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button class="btn btn-light btn-sm"  ngbDropdownItem routerLink="/comptabilite/inscription">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                    Inscription</button>
+                <button ngbDropdownItem  class="btn btn-light btn-sm" routerLink="/comptabilite/paiement">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    Etat paiement</button>
+            </div>
+        </div>
+      </ul>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <!-- <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button"><fa-icon [icon]='["fas", "search"]'></fa-icon></button>
+            </div>
+        </div> -->
+    </form>
+    <!-- Navbar-->
+       <div class="text-light">
+           {{lastName |titlecase}}  {{firstName|titlecase}}
+       </div>
+    <ul class="navbar-nav ml-auto ml-md-0">
+        <sb-top-nav-user></sb-top-nav-user>
+    </ul>
+</nav>

@@ -1,0 +1,243 @@
+<div class="row" class="row" *ngIf="!idCoursePlanned">
+    <div class="col-sm-12">
+        <div class="card bg-light">
+            <strong class="card-header bg-dark">
+                <div style="color: white">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                </div>
+            </strong>
+            <div class="card-body">
+                <form [formGroup]="createPlanForm" (validSubmit)="onSubmit()">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="courseLevel">Course Level</label>
+                            <select class="custom-select" (change)="changeCourseLevel($event)" id ="courseLevel" formControlName="courseLevel">
+                                <option  *ngFor="let cl of course$|async " [value]="cl.courseLevel" (click)="display(cl)">{{cl.courseLevel}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="courseName">Course Name</label>
+                            <select class="custom-select" id ="courseName" formControlName="courseName">
+                                <option  *ngFor="let c of selectedCourse" [value]="c.courseName">{{c.courseName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="courseType">Type</label>
+                            <select class="custom-select" id ="courseType" formControlName="courseType">
+                                <option value="IK">IK</option>
+                                <option value="AK">AK</option>
+                                <option value="SI">SI</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="courseMode">Mode</label>
+                            <select class="custom-select" id ="courseMode" formControlName="courseMode">
+                                <option value="Virtual">Virtual</option>
+                                <option value="Hybrid">Hybrid</option>
+                                <option value="Presential">Presential</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="startDate">Start date</label>
+                            <input type="date" class="form-control"
+                                   formControlName="startDate"
+                                   id="startDate" placeholder="23/01/2021">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="endDate">End date</label>
+                            <input type="date" class="form-control"
+                                   formControlName="endDate"
+                                   id="endDate" placeholder="23/01/2021">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="startTime">Start Time</label>
+                            <input class="form-control" id="startTime" type="text" placeholder="09:00"
+                                   formControlName="startTime" type="text">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="endTime">End Time</label>
+                            <input class="form-control" id="endTime" type="text" placeholder="12:30"
+                                   formControlName="endTime" type="text">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                     <div class="form-group col-md-3">
+                         <label for="courseFrequency">Frequency</label>
+                         <select class="form-control" multiple id="courseFrequency"   formControlName="courseFrequency">
+                             <option>Monday</option>
+                             <option>Tuesday</option>
+                             <option>Wednesday</option>
+                             <option>Thursday</option>
+                             <option>Friday</option>
+                         </select>
+                     </div>
+                     <div class="form-group col-md-3">
+                         <label>Room</label>
+                         <ng-multiselect-dropdown
+                                                  [placeholder]="'Select Room'"
+                                                  [data]="classrom$|async"
+                                                  formControlName="room"
+                                                  [settings]="dropdownSettingsRoom">
+                         </ng-multiselect-dropdown>
+                     </div>
+                     <div class="form-group col-md-3">
+                           <label for="employee">Teacher</label>
+                           <select class="custom-select"  id ='employee'(change)="changeTeacher($event.target.value)" formControlName="employee">
+                               <option *ngFor="let teacher of employee$|async" [ngValue]="teacher" [disabled]="!teacher.status">{{teacher.lastName}} {{teacher.firstName}}</option>
+                           </select>
+                       </div>
+                    <div class="form-group col-md-3">
+                        <label>Status</label>
+                        <select class="custom-select" formControlName="plannedCourseStatus">
+                            <option *ngFor="let status of keys(EplannedCourseStatus)"
+                                    [ngValue]="EplannedCourseStatus[status]">{{status}}</option>
+                        </select>
+                    </div>
+                   </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Student List</label>
+                            <ng-multiselect-dropdown
+                                    name="students"
+                                    [placeholder]="'Select Student'"
+                                    [data]="student$|async"
+                                    formControlName="students"
+                                    [settings]="dropdownSettingsStudent">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-danger mr-1" routerLink="/courses/course-planned-list">Annuler</button>
+                        <button type="submit" (click)="onSubmit()" class="btn btn-dark mr-1">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row" *ngIf="idCoursePlanned">
+    <div class="col-sm-12">
+        <div class="card bg-light">
+            <strong class="card-header bg-dark">
+                <div style="color: white">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                </div>
+            </strong>
+            <div class="card-body">
+                <form [formGroup]="editPlanForm" (validSubmit)="onSubmit()">
+                    <div class="form-row">
+                        <div class="form-group col-md-3" *ngIf="course$">
+                            <label for="courseLevel">Course Level</label>
+                            <select class="custom-select" (change)="changeCourseLevel($event)" id ="courseLevel" formControlName="courseLevel">
+                                <option  *ngFor="let cl of course$|async " [value]="cl.courseLevel">{{cl.courseLevel}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="courseName">Course Name</label>
+                            <!-- <input type="text" class="form-control" id="courseName"
+                                    formControlName="courseName"
+                                    placeholder="A 1.1" readonly>-->
+                            <select class="custom-select" id ="courseName" formControlName="courseName">
+                                <option  *ngFor="let c of selectedCourse" [value]="c.courseName">{{c.courseName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="courseType">Type</label>
+                            <select class="custom-select" id ="courseType" formControlName="courseType">
+                                <option value="IK">IK</option>
+                                <option value="AK">AK</option>
+                                <option value="SI">SI</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="courseMode">Mode</label>
+                            <select class="custom-select" id ="courseMode" formControlName="courseMode">
+                                <option value="Virtual">Virtual</option>
+                                <option value="Hybrid">Hybrid</option>
+                                <option value="Presential">Presential</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for="startDate">Start date</label>
+                            <input type="date" class="form-control"
+                                   formControlName="startDate"
+                                   id="startDate" placeholder="23/01/2021">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="endDate">End date</label>
+                            <input type="date" class="form-control"
+                                   formControlName="endDate"
+                                   id="endDate" placeholder="23/01/2021">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="startTime">Start Time</label>
+                            <input class="form-control" id="startTime" type="text" placeholder="09:00"
+                                   formControlName="startTime" type="text">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="endTime">End Time</label>
+                            <input class="form-control" id="endTime" type="text" placeholder="12:30"
+                                   formControlName="endTime" type="text">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label>Frequency</label>
+                            <ng-multiselect-dropdown
+                                                     name="courseFrequency"
+                                                     [placeholder]="'Select Frequency'"
+                                                     [data]="frequency"
+                                                     formControlName="courseFrequency"
+                                                     [settings]="dropdownSettingsFrequency">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Room</label>
+                            <ng-multiselect-dropdown
+                                                     name="room"
+                                                     [placeholder]="'Select Room'"
+                                                     [data]="classrom$|async"
+                                                     formControlName="room"
+                                                     [settings]="dropdownSettingsRoom">
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="employee">Teacher</label>
+                            <select class="custom-select"  id ='employee'(change)="changeTeacher($event.target.value)" formControlName="employee">
+                                <option *ngFor="let teacher of employee$|async" [ngValue]="teacher.id" [disabled]="!teacher.status">{{teacher.lastName}} {{teacher.firstName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Status</label>
+                            <select class="custom-select" formControlName="plannedCourseStatus">
+                                <option *ngFor="let status of keys(EplannedCourseStatus)"
+                                        [ngValue]="EplannedCourseStatus[status]">{{status}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="student">Student List</label>
+                            <ng-multiselect-dropdown id="student"
+                                                     name="student"
+                                                     [placeholder]="'Select Student'"
+                                                     [data]="student$|async"
+                                                     formControlName="students"
+                                                     [settings]="dropdownSettingsStudent">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-danger mr-1" routerLink="/courses/course-planner-list">Annuler</button>
+                        <button type="submit" class="btn btn-dark mr-1">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

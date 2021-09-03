@@ -1,0 +1,149 @@
+<div class="row" *ngIf="!isEditProfil">
+    <div class="col-sm-2">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <span class="text-light">
+         <i class="fa fa-id-card-o" aria-hidden="true"></i>
+        Code :  {{selectedTeacher?.id}}
+          </span>
+        </strong>
+        <div class="card-body">
+        <div class="card" *ngIf="selectedTeacher?.gender=='M' else femaleAvatar">
+            <img src="/assets/avatar/avatar-3.png" alt="employee-lo go" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+        <span class="text-light">
+         <i class="fa fa-list" aria-hidden="true"></i>
+          Teacher profile
+        </span>
+        <div class="float-right">
+          <button class="btn btn-dark" (click)="editProfil()">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+           </button>
+        </div>
+        </strong>
+        <div class="card-body">
+          <p>
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <strong> Last name:</strong>
+            {{selectedTeacher?.lastName}}
+          </p>
+          <p>
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+            <strong> First name:</strong>
+            {{selectedTeacher?.firstName}}
+          </p>
+          <p>
+            <i class="fa fa-venus" aria-hidden="true"></i>
+            <strong> Sex:</strong>
+            {{selectedTeacher?.gender}}
+          </p>
+          <!--<p>
+            <i class="fa fa-briefcase" aria-hidden="true"></i>
+            <strong> Role:</strong>
+            {{selectedTeacher?.jobRole}}
+          </p>-->
+          <p>
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <strong> Email:</strong>
+            {{selectedTeacher?.email}}
+          </p>
+          <p>
+            <i class="fa fa-mobile" aria-hidden="true"></i>
+            <strong> Private Phone:</strong>
+            {{selectedTeacher?.privatePhone}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #femaleAvatar>
+    <div class="card">
+      <img src="/assets/avatar/avatar-F.png" alt="employee-lo go" class="img-thumbnail">
+    </div>
+  </ng-template>
+
+
+  <div class="row" *ngIf="isEditProfil">
+    <div class="col-sm-2">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <div style="color: white">
+            <i class="fa fa-id-card-o" aria-hidden="true"></i>
+           Code : {{selectedTeacher?.id}}
+          </div>
+
+        </strong>
+        <div class="card-body">
+          <div class="card">
+            <img src="/assets/avatar/avatar-3.png" alt="employee-logo" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="card bg-light">
+        <strong class="card-header bg-dark">
+          <span class="text-light">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            {{selectedTeacher?.firstName}} {{selectedTeacher?.lastName}}
+          </span>
+          <div class="float-right">
+          <button class="btn btn-dark" (click)="editProfil()">
+            <i class="fa fa-user" aria-hidden="true"></i>
+           </button>
+        </div>
+        </strong>
+        <div class="card-body">
+          <form [formGroup]="editTeacherForm" (validSubmit)="onSubmit()">
+<!--<pre>{{editTeacherForm.value|json}}</pre>-->
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="lastname">Last name</label>
+                <input type="text" class="form-control" id="lastname"
+                       formControlName="lastName"
+                       placeholder="John">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="firstname">Prenom(s)</label>
+                <input type="text" class="form-control" id="firstname"
+                       formControlName="firstName"
+                       placeholder="Doe">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="privatePhone">Private Phone</label>
+                <input class="form-control" type="tel"
+                       formControlName="privatePhone" placeholder="(+212)639607953"
+                       value="(+212)639607953" id="privatePhone">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="email">Email</label>
+                <input class="form-control" type="tel"
+                       formControlName="email" placeholder="example@gmail.com"
+                       value="example@gmail.com" id="email">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="gender">Sex</label>
+                <select class="custom-select" (change)="changeGender($event)" id ="gender" formControlName="gender">
+                  <option value="M">M</option>
+                  <option value="F">F</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="float-right">
+              <button type="button" class="btn btn-danger mr-1" (click)="dismiss()">Annuler</button>
+              <button type="submit" class="btn btn-dark mr-1">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

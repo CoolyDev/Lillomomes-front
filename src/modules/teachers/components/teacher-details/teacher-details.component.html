@@ -1,0 +1,108 @@
+<div class="row">
+  <div class="col-sm-2">
+    <div class="card bg-light">
+      <strong class="card-header bg-dark">
+        <span class="text-light">
+       <i class="fa fa-id-card-o" aria-hidden="true"></i>
+      Code :  {{selectedEmployDetails.id}}
+        </span>
+      </strong>
+      <div class="card-body">
+      <div class="card" *ngIf="selectedEmployDetails.gender=='M' else femaleAvatar">
+          <img src="/assets/avatar/avatar-3.png" alt="employee-lo go" class="img-thumbnail">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-10">
+    <div class="card bg-light">
+      <strong class="card-header bg-dark">
+      <span class="text-light">
+       <i class="fa fa-list" aria-hidden="true"></i> Employee details
+      </span>
+      </strong>
+      <div class="card-body">
+        <p>
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <strong> Last name:</strong>
+          {{selectedEmployDetails.lastName}}
+        </p>
+        <p>
+          <i class="fa fa-user-o" aria-hidden="true"></i>
+          <strong> First name:</strong>
+          {{selectedEmployDetails.firstName}}
+        </p>
+        <p>
+          <i class="fa fa-venus" aria-hidden="true"></i>
+          <strong> Sex:</strong>
+          {{selectedEmployDetails.gender}}
+        </p>
+        <p>
+          <i class="fa fa-briefcase" aria-hidden="true"></i>
+          <strong> Role:</strong>
+          {{selectedEmployDetails.jobRole}}
+        </p>
+        <p>
+          <i class="fa fa-desktop" aria-hidden="true"></i>
+          <strong> Departement:</strong>
+          {{selectedEmployDetails.department}}
+        </p>
+        <p>
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          <strong> Email:</strong>
+          {{selectedEmployDetails.email}}
+        </p>
+        <p>
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          <strong> Business Phone:</strong>
+          {{selectedEmployDetails.businessPhone}}
+        </p>
+        <p>
+          <i class="fa fa-mobile" aria-hidden="true"></i>
+          <strong> Private Phone:</strong>
+          {{selectedEmployDetails.privatePhone}}
+        </p>
+        <p>
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          <strong> Work Location:</strong>
+          {{selectedEmployDetails.workLocation}}
+        </p>
+        <p>
+          <i class="fa fa-suitcase" aria-hidden="true"></i>
+          <strong> Status:</strong>
+          {{selectedEmployDetails.status}}
+        </p>
+      </div>
+    </div>
+    <div class="card bg-light">
+      <strong class="card-header bg-dark">
+      <span class="text-light">
+      <i class="fa fa-info-circle" aria-hidden="true"></i>Employee History
+      </span>
+      </strong>
+      <div class="card-body">
+        <div  class="row">
+          <div class="col-4 col-sm-4 col-md-4 col-lg-4" *ngFor="let historique of selectedEmployDetails.historique;let index = index">
+            <p>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <strong> Year:</strong>
+              {{historique.year}}  
+            </p>
+            <p>
+              <i class="fa fa-briefcase" aria-hidden="true"></i>
+              <strong> Intitule:</strong>
+              {{historique.entitled}}
+            </p>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #femaleAvatar>
+  <div class="card">
+    <img src="/assets/avatar/avatar-F.png" alt="employee-lo go" class="img-thumbnail">
+  </div>
+</ng-template>
+

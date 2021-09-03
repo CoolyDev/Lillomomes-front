@@ -1,0 +1,148 @@
+
+<div class="row">
+    <div class="col-sm-4">
+        <form class="d-flex">
+            <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search">
+        </form>
+    </div>
+    <div class="col-sm-8">
+        <div class="form-group form-inline float-right">
+            <button type="button" class="btn btn-primary mr-1"
+                    (click)="createClassroom(content)">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Create
+            </button>
+        </div>
+    </div>
+</div>
+<div  class="row">
+    <div class="card ml-4 mb-4 mr-1"  *ngFor="let classroom of classroom$ |async">
+        <div class="card-header bg-light">
+           <span class="text-dark font-weight-bold">
+              Room Code :
+           </span>
+            {{classroom.id}}
+            <span class="float-right text-dark">
+
+            <div ngbDropdown class="d-inline-block" autoClose="outside">
+            <button class="btn btn-light" id="export" ngbDropdownToggle>
+              <fa-icon [icon]="ellipsis"></fa-icon>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button type="button" class="btn btn-light btn-sm" ngbDropdownItem (click)="editClassroom(classroom,editClasssroomModal)">
+                <span class="mr-1"><i class="fa fa-pencil" aria-hidden="true"></i> </span>Edit
+              </button>
+               <button type="button" *ngIf="classroom.archived"
+                       class="btn btn-light btn-sm" ngbDropdownItem (click)="archiveClassroom(classroom)">
+              <span class="mr-1">
+                <i class="fa fa-archive" aria-hidden="true"></i>
+              </span>Archive
+              </button>
+               <button type="button" *ngIf="!classroom.archived"
+                         class="btn btn-light btn-sm" ngbDropdownItem (click)="archiveClassroom(classroom)">
+              <span class="mr-1">
+               <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+              </span>Active
+              </button>
+            </div>
+          </div>
+          </span>
+        </div>
+      <div class="card-body flex-row flex-wrap">
+           <div class="row">
+             <div class="col-sm-9">
+                 <div *ngIf="!classroom.archived">
+                     <span class="text-dark font-weight-bold">
+                      Name :
+                     </span>
+                     {{classroom.name}}
+                     <span class="badge badge-danger">Archived</span>
+                 </div>
+                 <div *ngIf="classroom.archived">
+                     <span class="text-dark font-weight-bold">
+                     Name :
+                     </span>
+                     {{classroom.name}}
+                     <span class="badge badge-success">Actived</span>
+                 </div>
+             </div>
+           </div>
+         </div>
+       </div>
+        <!--  </div>-->
+</div>
+<ng-template #content let-modal>
+    <div style="margin-top: 10px">
+        <div class="modal-header">
+            <form [formGroup]="createClassroomForm" (validSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control"
+                               formControlName="archived" hidden>
+                        <input type="text" class="form-control" id="name"
+                               formControlName="name"
+                               placeholder="Entrez la classe">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control" id="scolarite"
+                               formControlName="scolarite" mask="separator.2" thousandSeparator="." class="form-control" suffix=" Dh"
+                               placeholder="Entrez la scolarite">
+                    </div>
+                </div>
+                <div class="float-right">
+                    <button type="button" class="btn btn-danger mr-1" routerLink="/classroom">Annuler</button>
+                    <button type="submit" class="btn btn-dark mr-1">Enregistrer</button>
+                </div>
+            </form>
+            <button type="button" class="close" aria-label="Close" (click)="CloseModal()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #editClasssroomModal let-modal>
+    <div style="margin-top: 10px">
+        <div class="modal-header">
+            <form [formGroup]="createClassroomForm" (validSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="name">student Name</label>
+                        <input type="text" class="form-control" id="idClassroom"
+                               formControlName="idClassroom" hidden>
+                        <input type="text" class="form-control" id="name"
+                               formControlName="name"
+                               placeholder="Salle A">
+                    </div>
+                </div>
+                <div class="float-right">
+                    <button type="button" class="btn btn-danger mr-1" routerLink="/employees">Annuler</button>
+                    <button type="submit" class="btn btn-dark mr-1">Enregistrer</button>
+                </div>
+            </form>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross Click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</ng-template>
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Classe deleting</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>
+            Are you sure you want to delete the class?
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Annuler</button>
+        <button type="submit" class="btn btn-primary" (click)="deleteClassroom()">Confirmer</button>
+    </div>
+</ng-template>
